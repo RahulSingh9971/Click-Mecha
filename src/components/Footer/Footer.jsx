@@ -1,0 +1,67 @@
+import React from 'react';
+import './Footer.css';
+import { FaTiktok, FaInstagram, FaXTwitter, FaYoutube } from 'react-icons/fa6';
+import logo from '../../assets/logo.png'; // Assuming same logo or need a white version
+
+const Footer = () => {
+    return (
+        <footer className="footer-section">
+            <div className="container">
+                <div className="row">
+                    {/* Branding Column */}
+                    <div className="col-lg-5 col-md-12 mb-4">
+                        <div className="footer-logo mb-3">
+                            {/* Using text for now as per design mockup appearance effectively, or the image with filter if needed */}
+                            <div className="logo-container">
+                                <img src={logo} alt="Clickmecha" className="footer-logo-img" />
+                            </div>
+                        </div>
+                        <p className="footer-description">
+                            We design, build, and market digital solutions that help businesses grow faster.
+                        </p>
+                        <div className="social-icons d-flex gap-3 mb-4">
+                            <a href="#" className="social-icon"><FaTiktok /></a>
+                            <a href="#" className="social-icon"><FaInstagram /></a>
+                            <a href="#" className="social-icon"><FaXTwitter /></a>
+                            <a href="#" className="social-icon"><FaYoutube /></a>
+                        </div>
+                        <div className="copyright text-muted">
+                            <small>
+                                Copyright ©kavya kapoor.<br />
+                                All rights reserved
+                            </small>
+                        </div>
+                    </div>
+
+                    {/* Navigation Links */}
+                    <div className="col-lg-3 col-md-6 mb-4">
+                        <ul className="list-unstyled footer-links">
+                            <li><a href="#home">HOME</a></li>
+                            <li><a href="#services">SERVICES</a></li>
+                            <li><a href="#case-studies">CASE STUDIES</a></li>
+                            <li><a href="#about">ABOUT</a></li>
+                            <li><a href="#blog">BLOG</a></li>
+                            <li><a href="#contact">CONTACT</a></li>
+                        </ul>
+                    </div>
+
+                    {/* Legal Links */}
+                    <div className="col-lg-4 col-md-6 mb-4">
+                        <ul className="list-unstyled footer-links">
+                            <li><a href="#privacy">PRIVACY POLICY</a></li>
+                            <li><a href="#terms">TERMS OF SERVICE</a></li>
+                            <li><a href="#cookies">COOKIES POLICIES</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {/* Background Text */}
+            <div className="footer-bg-text">
+                CLICKMECHA
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;

@@ -1,0 +1,80 @@
+import React from 'react';
+import './Work.css';
+import projectMadhusudan from '../../assets/work/project-madhusudan.png';
+import projectNeelgagan from '../../assets/work/project-neelgagan.png';
+import projectSindoor from '../../assets/work/project-sindoor.png';
+import projectRpBuildtech from '../../assets/work/project-rpbuildtech.png';
+
+const projects = [
+    {
+        id: 1,
+        title: 'Madhusudan',
+        image: projectMadhusudan,
+        tag: 'DEVELOPMENT'
+    },
+    {
+        id: 2,
+        title: 'Neelgagan',
+        image: projectNeelgagan,
+        tag: 'DEVELOPMENT'
+    },
+    {
+        id: 3,
+        title: 'Sindoor',
+        image: projectSindoor,
+        tag: 'DEVELOPMENT'
+    },
+    {
+        id: 4,
+        title: 'RP Buildtech',
+        image: projectRpBuildtech,
+        tag: 'DEVELOPMENT'
+    }
+];
+
+const Work = () => {
+    return (
+        <section className="work-section">
+            <div className="container">
+                <div className="row">
+
+                    {/* Right Content */}
+                    <div className="col-lg-12 col-md-12">
+                        {/* Headline */}
+                        <div className="work-header mb-5 d-flex align-items-start justify-content-between flex-wrap gap-3">
+                            <span className="section-label">WORK SHOWCASE</span>
+                            <h2 className="work-headline">
+                                Our Philosophy is to build a <br className="d-none d-md-block" />
+                                <span className="highlight-text">Product for greater good.</span>
+                            </h2>
+                            {/* Illustration placeholder - could be added if user provides it */}
+                            {/* <img src={manIllustration} alt="Great Work" className="work-header-icon" /> */}
+                        </div>
+
+                        {/* Projects Grid */}
+                        <div className="row g-4">
+                            {projects.map((project) => (
+                                <div key={project.id} className="col-md-6 mb-4">
+                                    <div className="project-card">
+                                        <div className="project-image-wrapper">
+                                            <span className="project-tag">{project.tag}</span>
+                                            <img src={project.image} alt={project.title} className="project-image" />
+                                        </div>
+                                        <div className="project-info mt-4">
+                                            <h3 className="project-title">{project.title}</h3>
+                                            <p className="project-desc">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnaaliqua. Ut enim ad minim veniam, quis n
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Work;

@@ -1,0 +1,133 @@
+.contact-section {
+    padding: 100px 0;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    margin-top: -95px;
+    position: relative;
+    z-index: 5;
+}
+
+.contact-headline {
+    font-family: 'Larken', serif;
+    font-size: 3.5rem;
+    color: #0E1D28;
+    line-height: 1.3;
+    margin-bottom: 3rem;
+}
+
+.emoji-3d {
+    display: inline-block;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    /* You can replace these with actual image tags if you have the 3D assets */
+}
+
+.contact-headline .highlight-text {
+    color: #F7962D;
+}
+
+/* Contact Info */
+.contact-info-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #0E1D28;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0E1D28;
+    font-size: 1.5rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-label {
+    font-weight: 700;
+    color: #0E1D28;
+    font-size: 1rem;
+}
+
+.contact-value {
+    color: #0E1D28;
+    font-size: 1rem;
+}
+
+/* CTA Button */
+.cta-wrapper {
+    margin-top: 20px;
+}
+
+.free-tag {
+    background-color: #0E1D28;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-book-call {
+    background-color: #F7962D;
+    color: #0E1D28;
+    border: 2px solid #0E1D28;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0px #0E1D28;
+    /* Solid shadow effect */
+    transition: all 0.2s ease;
+}
+
+.btn-book-call:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #0E1D28;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .contact-headline {
+        font-size: 2.5rem;
+    }
+
+    .contact-info-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .contact-item {
+        width: 100%;
+        justify-content: center;
+    }
+}

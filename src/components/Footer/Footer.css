@@ -1,0 +1,107 @@
+.footer-section {
+    background-color: #0B1221;
+    /* Dark navy/black from screenshot */
+    color: white;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-logo-img {
+    height: 40px;
+    /* Adjust based on logo needs */
+    width: auto;
+    filter: brightness(0) invert(1);
+    /* Make black logo white if it's transparent */
+}
+
+.footer-description {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin-bottom: 2rem;
+}
+
+.social-icons .social-icon {
+    color: white;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icons .social-icon:hover {
+    background-color: white;
+    color: #0B1221;
+    border-color: white;
+}
+
+.copyright {
+    color: #889bb0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.footer-links li {
+    margin-bottom: 1.5rem;
+}
+
+.footer-links a {
+    color: #f8f9fa;
+    text-decoration: none;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff9900;
+}
+
+/* Background Large Text */
+.footer-bg-text {
+    position: absolute;
+    bottom: -0.18em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18vw;
+    /* Very large responsive size */
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.03);
+    /* Very transparent */
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 0.8;
+    z-index: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Ensure content sits above bg text */
+.footer-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        padding-top: 3rem;
+        text-align: left;
+        /* Keep left alignment */
+    }
+
+    .footer-bg-text {
+        font-size: 22vw;
+    }
+}
