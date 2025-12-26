@@ -34,7 +34,7 @@ const projects = [
 
 const Work = () => {
     return (
-        <section className="work-section">
+        <section id="case-studies" className="work-section">
             <div className="container">
                 <div className="row">
 

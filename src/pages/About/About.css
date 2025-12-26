@@ -1,0 +1,133 @@
+.about-page {
+    width: 100%;
+    background-color: #fff;
+}
+
+.section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+
+section.meet-kavya-section {
+    margin-top: -96px;
+    position: relative;
+}
+
+/* Custom bg utility if not in bootstrap standard setup for cover/center */
+.bg-cover {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-center {
+    background-position: center;
+}
+
+/* Typography remains custom as requested/designed */
+.about-title {
+    font-family: 'Larken', system-ui, serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: #fca311;
+}
+
+.about-description {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1.15rem;
+    color: #4b5563;
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+/* Meet Kavya Section */
+.section-label-orange {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fca311;
+    text-transform: capitalize;
+    display: block;
+}
+
+.about-subheading {
+    font-family: 'Larken', system-ui, serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.about-text {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+.stat-number {
+    font-family: 'Larken', system-ui, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.kavya-image-wrapper img {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Story Section */
+.story-heading {
+    font-family: 'Larken', system-ui, serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.highlight-orange {
+    color: #fca311;
+}
+
+.story-image-wrapper img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.story-image-wrapper img:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .about-title {
+        font-size: 2.5rem;
+    }
+
+    .about-subheading {
+        font-size: 2.2rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .story-heading {
+        font-size: 1.8rem;
+    }
+
+    .section-padding {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}

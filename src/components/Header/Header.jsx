@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/logo.png';
 
@@ -24,11 +25,11 @@ const Header = () => {
 
                 <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
                     <div className="close-menu-icon" onClick={toggleMenu}>&times;</div>
-                    <a href="#home" onClick={toggleMenu}>HOME</a>
-                    <a href="#services" onClick={toggleMenu}>SERVICES</a>
-                    <a href="#case-studies" onClick={toggleMenu}>CASE STUDIES</a>
-                    <a href="#about" onClick={toggleMenu}>ABOUT</a>
-                    <a href="#blogs" onClick={toggleMenu}>BLOGS</a>
+                    <Link to="/" onClick={toggleMenu}>HOME</Link>
+                    <a href="/#services" onClick={toggleMenu}>SERVICES</a>
+                    <a href="/#case-studies" onClick={toggleMenu}>CASE STUDIES</a>
+                    <Link to="/about" onClick={toggleMenu}>ABOUT</Link>
+                    <a href="/#blogs" onClick={toggleMenu}>BLOGS</a>
                     <div className="mobile-cta">
                         <button className="btn-book" onClick={toggleMenu}>BOOK A FREE CALL</button>
                     </div>

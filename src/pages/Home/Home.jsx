@@ -175,7 +175,7 @@ const Home = () => {
     return (
         <main>
             {/* === Hero Section === */}
-            <section className="hero-section" style={{ backgroundImage: `url(${heroBg})` }}>
+            <section id="home" className="hero-section" style={{ backgroundImage: `url(${heroBg})` }}>
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-7 col-md-12 hero-content">
@@ -263,7 +263,7 @@ const Home = () => {
             </>
 
             {/* === Services Section === */}
-            <section className="services-section">
+            <section id="services" className="services-section">
                 <div className="container">
                     <div className="row pb-5 align-items-end position-relative">
                         <div className="col-lg-7">
