@@ -1,16 +1,52 @@
 import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { LuLightbulb, LuBrainCircuit, LuMoonStar, LuPhone, LuMail } from 'react-icons/lu';
 import './About.css';
 import kavyaImg from '../../assets/about-image/kavya-kapoor.png';
 import storyLeftImg from '../../assets/about-image/story-left.png';
 import storyRightImg from '../../assets/about-image/story-right.png';
 import bgaboutimg from '../../assets/home-images/hero-Bg.png';
 import aboutimgfloat from '../../assets/home-images/about-bg-blur.png';
+import teamWorkingImg from '../../assets/about-image/team-working.png';
+import curvedArrowImg from '../../assets/about-image/curved-arrow.png';
 
 const About = () => {
+
+    // Slider Settings
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
+
     return (
         <div className="about-page">
             {/* Hero Text Section */}
-            <div className="about-hero-wrappe position-relative vh-100 bg-cover bg-center" style={{ backgroundImage: `url(${bgaboutimg})` }}>
+            <div className="about-hero-wrappe position-relative vh-50 bg-cover bg-center" style={{ backgroundImage: `url(${bgaboutimg})` }}>
                 <div className="hero-image-box">
                     <img src={aboutimgfloat} alt="Story Illustration" className="about-img-float position-absolute bottom-0 start-0 w-25" />
                 </div>
@@ -114,6 +150,237 @@ const About = () => {
                                 with a loud voice and an even louder belief: I deserve a chance.
                                 And when no one gave him one, he created his own.
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Turning Point Section */}
+            <section className="turning-point-section">
+                <div className="container turning-point-content">
+                    {/* The Turning Point */}
+                    <div className="text-center mb-5">
+                        <h2 className="story-heading mb-5">The Turning Point</h2>
+                        <div className="row text-start justify-content-center">
+                            <div className="col-lg-5 mb-4 mb-lg-0">
+                                <p className="about-text">
+                                    There came a day — a day Kavya still remembers — when everything changed.
+                                    He had been chasing a mid-sized brand for months. After yet another rejection,
+                                    he sat alone wondering if he should give up.
+                                </p>
+                                <p className="about-text">
+                                    But something inside him refused to quit. He created an entire digital campaign
+                                    for that brand — for free. He wrote the strategy, designed creatives, planned ads,
+                                    crafted messaging, and built the concept overnight.
+                                </p>
+                            </div>
+                            <div className="col-lg-5">
+                                <p className="about-text">
+                                    The next morning, he walked into their office without a meeting slot, looked the
+                                    brand manager in the eye and said: “You don’t have to hire me. Just see what I can do.”
+                                </p>
+                                <p className="about-text">
+                                    That moment changed everything. The brand hired him instantly — and that break
+                                    opened multiple doors.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Milestone Timeline */}
+                    <div className="mt-5 pt-4">
+                        <h2 className="story-heading text-center mb-5">Milestone Timeline</h2>
+                        <div className="timeline-cards-row">
+                            <Slider {...settings}>
+                                {/* Card 1 */}
+                                <div className="timeline-card-wrapper">
+                                    <div className="timeline-card">
+                                        <span className="timeline-badge badge-early-days">EARLY DAYS</span>
+                                        <h3 className="timeline-title">A laptop, a pitch, and endless curiosity</h3>
+                                        <p className="timeline-text">
+                                            Kavya began pitching with nothing but ideas. The constant questioning of ads
+                                            became his advantage.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Card 2 */}
+                                <div className="timeline-card-wrapper">
+                                    <div className="timeline-card">
+                                        <span className="timeline-badge badge-growth">GROWTH</span>
+                                        <h3 className="timeline-title">From small brands to big names</h3>
+                                        <p className="timeline-text">
+                                            Bold work, clear results, and unapologetic creativity attracted bigger brands.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Card 3 */}
+                                <div className="timeline-card-wrapper">
+                                    <div className="timeline-card">
+                                        <span className="timeline-badge badge-the-break">THE BREAK</span>
+                                        <h3 className="timeline-title">Free overnight campaign</h3>
+                                        <p className="timeline-text">
+                                            Building a full campaign for free and walking it into a client’s office turned
+                                            a rejection into opportunity.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Card 4 */}
+                                <div className="timeline-card-wrapper">
+                                    <div className="timeline-card">
+                                        <span className="timeline-badge badge-today">TODAY</span>
+                                        <h3 className="timeline-title">A culture of courage</h3>
+                                        <p className="timeline-text">
+                                            We still do things with the same hunger. We still drive results for every client
+                                            with the courage that started it all.
+                                        </p>
+                                    </div>
+                                </div>
+                            </Slider>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Who We Are Section */}
+            <section className="who-we-are-section section-padding">
+                <div className="container">
+                    <div className="row mb-5 align-items-end">
+                        <div className="col-lg-6">
+                            <h2 className="story-heading">
+                                What Makes Us <br />
+                                <span className="highlight-orange">Who We Are</span>
+                            </h2>
+                        </div>
+                        <div className="col-lg-6 text-lg-end">
+                            <p className="who-we-are-intro">
+                                A reflection of Kavya’s journey: <br />
+                                boldness, honesty, creativity and the <br />
+                                hunger to push boundaries.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="row gx-5 mb-5 pb-5">
+                        {/* Item 1 */}
+                        <div className="col-lg-4 mb-4 mb-lg-0 text-center text-lg-start">
+                            <div className="icon-box mb-4">
+                                <LuLightbulb size={40} color="#E89B25" strokeWidth={1.5} />
+                            </div>
+                            <h3 className="value-title">Ideas That Make Noise</h3>
+                            <p className="value-desc">
+                                Concepts that break the quiet and get noticed.
+                            </p>
+                        </div>
+                        {/* Item 2 */}
+                        <div className="col-lg-4 mb-4 mb-lg-0 text-center text-lg-start">
+                            <div className="icon-box mb-4">
+                                <LuBrainCircuit size={40} color="#E89B25" strokeWidth={1.5} />
+                            </div>
+                            <h3 className="value-title">Strategies That Cut Through</h3>
+                            <p className="value-desc">
+                                Tactics built for measurable impact.
+                            </p>
+                        </div>
+                        {/* Item 3 */}
+                        <div className="col-lg-4 text-center text-lg-start">
+                            <div className="icon-box mb-4">
+                                <LuMoonStar size={40} color="#E89B25" strokeWidth={1.5} />
+                            </div>
+                            <h3 className="value-title">Honesty & Hard Work</h3>
+                            <p className="value-desc">
+                                Direct feedback, relentless execution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Emotional Core Section */}
+            <section className="emotional-core-section section-padding pt-0">
+                <div className="container">
+                    <div className="row gx-5 align-items-center">
+                        <div className="col-lg-6 mb-5 mb-lg-0">
+                            <div className="about-team-image-wrapper">
+                                <img src={teamWorkingImg} alt="Team Working" className="img-fluid rounded-4" />
+                            </div>
+                        </div>
+                        <div className="col-lg-6 bg-light-creme p-5 rounded-4 position-relative">
+                            <div className="emotional-content">
+                                <h2 className="story-heading mb-4 position-relative d-inline-block">
+                                    The Emotional Core <br />
+                                    Behind the Brand
+                                    <img src={curvedArrowImg} alt="arrow" className="curved-arrow-icon" />
+                                </h2>
+                                <p className="about-text mb-5">
+                                    Nights of doubt, shoestring budgets, and the small victories that shaped a leader.
+                                    Every struggle taught resilience and gratitude.
+                                </p>
+
+                                <ul className="core-values-list list-unstyled mb-5">
+                                    <li className="mb-3">Designed the first logo himself due to budget limits</li>
+                                    <li className="mb-3">Waited for clients who never showed up</li>
+                                    <li className="mb-3">Felt the weight of family expectations</li>
+                                </ul>
+
+                                <span className="highlight-tagline">AND KEPT GOING...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="cta-section section-padding pt-0 pb-0">
+                <div className="cta-card position-relative overflow-hidden w-100 rounded-0">
+                    <div className="container">
+                        <div className="cta-content position-relative z-1">
+                            <div className="row align-items-center">
+                                <div className="col-lg-6 mb-5 mb-lg-0">
+                                    <h2 className="cta-title text-white">
+                                        Ready to <br />
+                                        make noise?
+                                    </h2>
+                                </div>
+                                <div className="col-lg-6 text-lg-end text-white">
+                                    <p className="cta-text mb-0">
+                                        We’ll be bold. We’ll be creative. We’ll
+                                        be honest — so your brand can be
+                                        heard clearly.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="cta-contact-row mt-5 pt-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 text-white">
+                                <div className="contact-item d-flex align-items-center gap-3">
+                                    <div className="contact-icon-circle">
+                                        <LuPhone size={24} />
+                                    </div>
+                                    <div className="contact-info text-start">
+                                        <span className="d-block small opacity-75">Phone Number:</span>
+                                        <span className="fw-bold">+91-99996-73073</span>
+                                    </div>
+                                </div>
+
+                                <div className="contact-item d-flex align-items-center gap-3">
+                                    <div className="contact-icon-circle">
+                                        <LuMail size={24} />
+                                    </div>
+                                    <div className="contact-info text-start">
+                                        <span className="d-block small opacity-75">Email:</span>
+                                        <span className="fw-bold">coffee@clickmecha.com</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="cta-button-wrapper text-center mt-5 position-relative d-inline-block start-50 translate-middle-x">
+                                <span className="badge-free position-absolute start-50 translate-middle-x">FREE</span>
+                                <a href="#" className="btn btn-white rounded-pill px-4 py-3 fw-bold">
+                                    BOOK A 30 MIN CALL
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
