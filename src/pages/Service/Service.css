@@ -1,0 +1,430 @@
+.service-page {
+    /* Ensure full width and appropriate spacing if needed */
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.service-hero {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    /* Fallback color if image fails or for behind opacity */
+    background-color: #fffaf0;
+}
+
+
+
+.service-hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem;
+    padding-bottom: 0;
+    /* Added internal padding */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50px;
+    /* To match the rounded card look */
+}
+
+/* Flex layout handled by Bootstrap classes in JSX (row, col-lg-6), 
+   but adding custom flex behavior for smaller screens just in case */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-lg-6 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .col-lg-6 {
+        width: 50%;
+    }
+}
+
+/* Left Side Styling */
+.rating-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.rating-avatars {
+    height: 32px;
+    width: auto;
+    margin-right: 0.75rem;
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.hero-heading {
+    font-family: 'Larken', system-ui, serif;
+    /* Using custom font if available */
+    font-size: 3rem;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.btn-book-hero {
+    background-color: #f7941e;
+    /* Orange from design */
+    color: #1a1a1a;
+    border: 2px solid #1a1a1a;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    /* 3D Effect: Hard solid shadow to the bottom-left */
+    box-shadow: -5px 6px 0px 0px #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-book-hero:hover {
+    /* "Press" effect: move button towards shadow */
+    transform: translate(-2px, 2px);
+    box-shadow: -3px 4px 0px 0px #1a1a1a;
+}
+
+.btn-book-hero:active {
+    /* Fully pressed */
+    transform: translate(-5px, 6px);
+    box-shadow: 0px 0px 0px 0px #1a1a1a;
+}
+
+/* Right Side Styling */
+.service-image-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.phones-mockup {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    /* Ensure it doesn't overflow drastically */
+    max-height: 600px;
+}
+
+.stat-badge {
+    position: absolute;
+    bottom: 20%;
+    left: -20px;
+    /* Adjust to float it correctly */
+    width: 140px;
+    height: 140px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.stat-percent {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-desc {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .service-hero {
+        text-align: center;
+        padding-top: 6rem;
+        /* Space for fixed header if needed */
+    }
+
+    .rating-pill {
+        margin: 0 auto 1.5rem;
+    }
+
+    .service-image-content {
+        margin-top: 3rem;
+    }
+
+    .hero-heading {
+        font-size: 2.2rem;
+    }
+}
+
+/* Trust Stats Section */
+.trust-stats-section {
+    padding: 2rem 0;
+    width: 100%;
+    margin-top: 1rem;
+    overflow: hidden;
+    /* Prevent horizontal scroll for slider */
+    background-color: transparent;
+}
+
+.desktop-stats-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.stat-item {
+    display: flex !important;
+    /* Force flex for slider elements */
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.stat-icon {
+    width: auto;
+    height: 40px;
+    /* Adjust based on icon aspect ratio */
+    object-fit: contain;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Slider Overrides if needed */
+.mobile-stats-slider .slick-slide {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+/* Offerings Section */
+.offerings-section {
+    padding: 5rem 0;
+    width: 100%;
+}
+
+.offerings-header {
+    margin-bottom: 4rem;
+}
+
+.section-intro-text {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-badge {
+    display: inline-block;
+    background-color: #f7941e;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.section-title {
+    font-family: 'Larken', system-ui, serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.15;
+}
+
+.text-orange {
+    color: #f7941e;
+}
+
+/* Offering Cards */
+.offerings-grid {
+    margin-top: 2rem;
+}
+
+.offering-card {
+    text-align: left;
+    padding: 1rem;
+}
+
+.offering-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    border: 1px solid #f7941e;
+}
+
+.offering-icon {
+    width: 50%;
+    height: auto;
+}
+
+.offering-title {
+    font-family: system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.offering-desc {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 991px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .offerings-header {
+        margin-bottom: 3rem;
+    }
+
+    .offering-card {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .offering-icon-wrapper {
+        margin: 0 auto 1.5rem;
+    }
+}
+
+/* Pain Points Section */
+.pain-points-section {
+    padding: 6rem 0;
+    width: 100%;
+    background-color: #fffbf2;
+    /* Creamy background */
+}
+
+.pain-points-header {
+    margin-bottom: 4rem;
+}
+
+.pain-points-title {
+    font-family: 'Larken', system-ui, serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.pain-points-subtitle {
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    font-size: 2.5rem;
+    /* Larger script text */
+    color: #f7941e;
+    font-weight: 400;
+    margin-top: 0;
+}
+
+.pain-point-card {
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.pain-point-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: #fff5cc;
+    /* Light yellow background */
+    border: 1px solid #ffe680;
+    border-radius: 20px;
+    /* Rounded square */
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(247, 148, 30, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.pain-point-card:hover .pain-point-icon-wrapper {
+    transform: translateY(-5px);
+}
+
+.pain-point-icon {
+    width: 40px;
+    height: auto;
+}
+
+.pain-point-title {
+    font-family: system-ui, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.pain-point-desc {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+@media (max-width: 991px) {
+    .pain-points-title {
+        font-size: 2.2rem;
+    }
+
+    .pain-points-subtitle {
+        font-size: 2rem;
+    }
+
+    .pain-points-grid .col-lg-4 {
+        margin-bottom: 3rem;
+    }
+}
