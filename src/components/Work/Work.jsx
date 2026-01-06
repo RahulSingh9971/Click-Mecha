@@ -4,6 +4,7 @@ import projectMadhusudan from '../../assets/work/project-madhusudan.png';
 import projectNeelgagan from '../../assets/work/project-neelgagan.png';
 import projectSindoor from '../../assets/work/project-sindoor.png';
 import projectRpBuildtech from '../../assets/work/project-rpbuildtech.png';
+import manIllustration from '../../assets/work/illustration-man.png';
 
 const projects = [
     {
@@ -47,8 +48,6 @@ const Work = () => {
                                 Our Philosophy is to build a <br className="d-none d-md-block" />
                                 <span className="highlight-text">Product for greater good.</span>
                             </h2>
-                            {/* Illustration placeholder - could be added if user provides it */}
-                            {/* <img src={manIllustration} alt="Great Work" className="work-header-icon" /> */}
                         </div>
 
                         {/* Projects Grid */}

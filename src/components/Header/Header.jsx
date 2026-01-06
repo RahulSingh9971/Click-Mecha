@@ -26,10 +26,12 @@ const Header = () => {
                 <nav className={`header-nav ${isMenuOpen ? 'open' : ''}`}>
                     <div className="close-menu-icon" onClick={toggleMenu}>&times;</div>
                     <Link to="/" onClick={toggleMenu}>HOME</Link>
-                    <Link to="/services" onClick={toggleMenu}>SERVICES</Link>
-                    <a href="/#case-studies" onClick={toggleMenu}>CASE STUDIES</a>
                     <Link to="/about" onClick={toggleMenu}>ABOUT</Link>
-                    <a href="/#blogs" onClick={toggleMenu}>BLOGS</a>
+                    <Link to="/services" onClick={toggleMenu}>SERVICES</Link>
+                    <Link to="/clientele" onClick={toggleMenu}>CLIENTELE</Link>
+                    <Link to="/career" onClick={toggleMenu}>CAREER</Link>
+                    <Link to="/blog" onClick={toggleMenu}>BLOG</Link>
+                    <Link to="/contact" onClick={toggleMenu}>CONTACT</Link>
                     <div className="mobile-cta">
                         <button className="btn-book" onClick={toggleMenu}>BOOK A FREE CALL</button>
                     </div>

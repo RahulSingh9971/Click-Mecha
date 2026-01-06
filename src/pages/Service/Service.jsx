@@ -11,6 +11,20 @@ import expIcon from '../../assets/service-images/icon-experience.png';
 import shopifyIcon from '../../assets/service-images/icon-shopify.png';
 import clientsIcon from '../../assets/service-images/icon-clients.png';
 import bulbIcon from '../../assets/service-images/icon-bulb.png';
+import Work from '../../components/Work/Work';
+import Contact from '../../components/Contact/Contact';
+
+// Client Logos
+import clientTinder from '../../assets/service-images/logo-tinder.png';
+import clientEa from '../../assets/service-images/logo-ea.png';
+import clientSlack from '../../assets/service-images/logo-slack.png';
+import clientAmazon from '../../assets/service-images/logo-amazon.png';
+import clientWalmart from '../../assets/service-images/logo-walmart.png';
+import clientGoogle from '../../assets/service-images/logo-google.png';
+import clientLinkedin from '../../assets/service-images/logo-linkedin.png';
+
+// Testimonials Asset
+import rocketIcon from '../../assets/home-images/rocket.png';
 
 const Service = () => {
     const stats = [
@@ -44,6 +58,51 @@ const Service = () => {
     ];
 
 
+    const plans = [
+        {
+            id: 1,
+            price: "₹21,999",
+            originalPrice: "₹40,000",
+            discount: "SAVE 30%",
+            description: "If your mobile conversions lag, UI/UX can ensure your site works smoothly all devices.",
+            features: [
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co"
+            ],
+            highlight: false
+        },
+        {
+            id: 2,
+            price: "₹25,999",
+            originalPrice: "₹40,000",
+            discount: "SAVE 30%",
+            description: "If your mobile conversions lag, UI/UX can ensure your site works smoothly all devices.",
+            features: [
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co"
+            ],
+            highlight: true
+        },
+        {
+            id: 3,
+            price: "₹29,999",
+            originalPrice: "₹40,000",
+            discount: "SAVE 30%",
+            description: "If your mobile conversions lag, UI/UX can ensure your site works smoothly all devices.",
+            features: [
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co",
+                "Lorem ipsum dolor sit amet, co"
+            ],
+            highlight: false
+        }
+    ];
+
     const sliderSettings = {
         dots: false,
         infinite: true,
@@ -69,6 +128,88 @@ const Service = () => {
                     autoplay: true,
                     autoplaySpeed: 3000,
                     arrows: false
+                }
+            }
+        ]
+    };
+
+    const clientSliderSettings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    dots: false
+                }
+            }
+        ]
+    };
+
+
+    // Testimonials Data & Settings
+    const testimonialsData = [
+        {
+            title: "Consistent Execution",
+            text: "Smart strategies and consistent execution. Our engagement went up, and the campaigns finally felt aligned with our brand. Really impressed with the results.",
+            stars: 5
+        },
+        {
+            title: "Modern, and user-friendly",
+            text: "The designs were clean, modern, and user-friendly. They understood our product well and delivered a smooth experience that our users instantly appreciated.",
+            stars: 5
+        },
+        {
+            title: "Full ownership",
+            text: "A well-coordinated team aUI/UXss marketing, design, and development. They took full ownership of the project and delivered work that genuinely elevated our brand.",
+            stars: 5
+        },
+        {
+            title: "Consistent Execution",
+            text: "Smart strategies and consistent execution. Our engagement went up, and the campaigns finally felt aligned with our brand. Really impressed with the results.",
+            stars: 5
+        }
+    ];
+
+    const testimonialSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
                 }
             }
         ]
@@ -229,6 +370,122 @@ const Service = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Work Showcase Section */}
+            <Work />
+
+            {/* Pricing Section */}
+            <section className="pricing-section">
+                <div className="container">
+                    <h2 className="pricing-title text-center">Our plans to get started</h2>
+
+                    <div className="row g-4 justify-content-center align-items-center">
+                        {plans.map((plan) => (
+                            <div key={plan.id} className="col-lg-4 col-md-6">
+                                <div className={`pricing-card ${plan.highlight ? 'highlight-card' : ''}`}>
+
+                                    <div className="discount-badge">{plan.discount}</div>
+
+                                    <div className="price-header">
+                                        <h3 className="price">{plan.price}</h3>
+                                        <span className="original-price">{plan.originalPrice}</span>
+                                    </div>
+
+                                    <p className="plan-description">{plan.description}</p>
+
+                                    <ul className="feature-list">
+                                        {plan.features.map((feature, idx) => (
+                                            <li key={idx}>
+                                                {/* Inline SVGs for check icons */}
+                                                {plan.highlight ? (
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="check-icon">
+                                                        <circle cx="12" cy="12" r="10" fill="#0E1D28" />
+                                                        <path d="M7.5 12L10.5 15L16.5 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                    </svg>
+                                                ) : (
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="check-icon">
+                                                        <circle cx="12" cy="12" r="10" fill="#F7941E" />
+                                                        <path d="M7.5 12L10.5 15L16.5 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                    </svg>
+                                                )}
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <button className="btn-book-pricing">BOOK A FREE CALL</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Our Clients Section */}
+            <section className="clients-section">
+                <div className="container-fluid">
+                    <h2 className="clients-title text-center">Our Clients</h2>
+                    <div className="clients-slider-wrapper">
+                        <Slider {...clientSliderSettings}>
+                            <div className="client-logo-wrapper">
+                                <img src={clientTinder} alt="Tinder" className="client-logo" />
+                            </div>
+                            <div className="client-logo-wrapper">
+                                <img src={clientEa} alt="EA" className="client-logo" />
+                            </div>
+                            <div className="client-logo-wrapper">
+                                <img src={clientSlack} alt="Slack" className="client-logo" />
+                            </div>
+                            <div className="client-logo-wrapper">
+                                <img src={clientAmazon} alt="Amazon" className="client-logo" />
+                            </div>
+                            <div className="client-logo-wrapper">
+                                <img src={clientGoogle} alt="Google" className="client-logo" />
+                            </div>
+                            <div className="client-logo-wrapper">
+                                <img src={clientWalmart} alt="Walmart" className="client-logo" />
+                            </div>
+                            <div className="client-logo-wrapper">
+                                <img src={clientLinkedin} alt="LinkedIn" className="client-logo" />
+                            </div>
+                        </Slider>
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="testimonials-section position-relative">
+                {/* <img src={rocketIcon} alt="Rocket" className="rocket-icon" /> */}
+                <div className="container">
+                    <div className="testimonials-header text-center mb-5 position-relative">
+                        <h2 className="testimonials-headline">
+                            What it’s like to <br />
+                            <span className="highlight-text">collaborate together</span>
+                        </h2>
+                    </div>
+                    <div className="testimonials-slider">
+                        <Slider {...testimonialSettings}>
+                            {testimonialsData.map((item, index) => (
+                                <div key={index} className="px-3">
+                                    <div className="testimonial-card">
+                                        <div className="quote-icon">“</div>
+                                        <div className="stars">
+                                            {[...Array(item.stars)].map((_, i) => (
+                                                <span key={i}>★</span>
+                                            ))}
+                                        </div>
+                                        <h3 className="testimonial-title">{item.title}</h3>
+                                        <p className="testimonial-desc">{item.text}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
+                </div>
+            </section>
+
+            {/* Contact Section */}
+            <Contact />
         </div>
     );
 };
