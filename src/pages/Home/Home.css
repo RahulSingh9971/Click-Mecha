@@ -22,8 +22,8 @@
     background: white;
     padding: 8px 20px 8px 8px;
     border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f0f0f0;
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); */
+    /* border: 1px solid #f0f0f0; */
 }
 
 .rating-avatars {
@@ -170,7 +170,7 @@
 }
 
 .stat-desc {
-    color: #666;
+    color: #0E1D28;
     font-size: 1rem;
     line-height: 1.5;
     max-width: 90%;
@@ -306,9 +306,9 @@
 
 /* Clients Styles */
 .clients-section {
-    padding: 14px 0 135px;
+    padding: 60px 0 175px;
     background-color: white;
-    font-family: 'Inter', sans-serif;
+    /* font-family: 'Inter', sans-serif; */
     overflow: hidden;
 }
 
@@ -618,6 +618,11 @@
 
 /* Responsive Adjustments from original files */
 @media (max-width: 992px) {
+
+    .about-blur-bg {
+        display: none;
+    }
+
     .hero-title {
         font-size: 3.5rem;
     }
@@ -625,6 +630,12 @@
     .hero-shape-container {
         opacity: 0.6;
         right: -200px;
+    }
+
+
+    .rating-pill {
+        padding-left: 0px !important;
+        margin-bottom: 10px !important;
     }
 
     .growth-headline {
@@ -663,15 +674,34 @@
     }
 
     .about-section {
-        padding: 60px 0;
+        padding: 45px 0;
     }
 
     .about-headline {
         font-size: 2rem;
     }
 
+    img.great-work-sticker {
+        right: 0;
+    }
+
+    .about-section {
+        position: relative;
+        padding: 45px 0;
+        background-color: white;
+        overflow: hidden;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        margin-top: -95px;
+        z-index: 1;
+    }
+
     .services-section {
-        padding: 60px 0;
+        padding: 45px 0;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        margin-top: -24px;
+        padding-bottom: 80px;
     }
 
     .services-headline {
@@ -679,7 +709,8 @@
     }
 
     .clients-section {
-        padding: 60px 0;
+        padding: 45px 0 !important;
+        padding-bottom: 80px !important;
     }
 
     .clients-headline {
@@ -687,7 +718,10 @@
     }
 
     .testimonials-section {
-        padding: 60px 0;
+        padding: 45px 0 !important;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        margin-top: -24px;
     }
 
     .testimonials-headline {
@@ -701,7 +735,17 @@
     }
 
     .results-section {
-        padding: 60px 0;
+        padding: 60px 0 !important;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        margin-top: -24px;
+    }
+
+    .growth-section {
+        padding: 60px 0 !important;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        margin-top: -24px;
     }
 
     .results-headline {
@@ -719,13 +763,15 @@
     .hero-floating-desc {
         position: relative;
         left: 0;
-        margin-top: 15px;
+        margin-top: -10px;
         padding-right: 20px;
+        padding-left: 12px;
+        max-width: 100%;
     }
 
     .hero-shape-container {
-        position: relative;
-        width: 80%;
+        /* position: relative; */
+        width: 104%;
         right: auto;
         margin: 30px auto 0;
         opacity: 0.8;

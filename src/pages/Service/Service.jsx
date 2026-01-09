@@ -428,25 +428,25 @@ const Service = () => {
                     <div className="clients-slider-wrapper">
                         <Slider {...clientSliderSettings}>
                             <div className="client-logo-wrapper">
-                                <img src={clientTinder} alt="Tinder" className="client-logo" />
+                                <img src={clientTinder} alt="Tinder" className="service-client-logo" />
                             </div>
                             <div className="client-logo-wrapper">
-                                <img src={clientEa} alt="EA" className="client-logo" />
+                                <img src={clientEa} alt="EA" className="service-client-logo" />
                             </div>
                             <div className="client-logo-wrapper">
-                                <img src={clientSlack} alt="Slack" className="client-logo" />
+                                <img src={clientSlack} alt="Slack" className="service-client-logo" />
                             </div>
                             <div className="client-logo-wrapper">
-                                <img src={clientAmazon} alt="Amazon" className="client-logo" />
+                                <img src={clientAmazon} alt="Amazon" className="service-client-logo" />
                             </div>
                             <div className="client-logo-wrapper">
-                                <img src={clientGoogle} alt="Google" className="client-logo" />
+                                <img src={clientGoogle} alt="Google" className="service-client-logo" />
                             </div>
                             <div className="client-logo-wrapper">
-                                <img src={clientWalmart} alt="Walmart" className="client-logo" />
+                                <img src={clientWalmart} alt="Walmart" className="service-client-logo" />
                             </div>
                             <div className="client-logo-wrapper">
-                                <img src={clientLinkedin} alt="LinkedIn" className="client-logo" />
+                                <img src={clientLinkedin} alt="LinkedIn" className="service-client-logo" />
                             </div>
                         </Slider>
                     </div>

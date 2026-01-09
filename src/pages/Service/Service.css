@@ -627,7 +627,7 @@
 
 /* Our Clients Section */
 .clients-section {
-    padding: 6rem 0;
+    /* padding: 6rem 0; */
     background-color: #fffbf2;
 }
 
@@ -638,7 +638,7 @@
     margin-bottom: 4rem;
 }
 
-.client-logo {
+.service-client-logo {
     height: 40px;
     /* Increased slightly for better visibility */
     width: auto;
@@ -649,7 +649,7 @@
     cursor: pointer;
 }
 
-.client-logo:hover {
+.service-client-logo:hover {
     filter: grayscale(0%) brightness(1);
     opacity: 1;
     transform: scale(1.1);
@@ -661,7 +661,7 @@
         margin-bottom: 2rem;
     }
 
-    .client-logo {
+    .service-client-logo {
         height: 28px;
         margin: 10px;
     }
@@ -686,8 +686,8 @@
     /* remove slick focus outline */
 }
 
-/* Override existing client-logo margins if they conflict */
-.clients-section .client-logo {
+/* Override existing service-client-logo margins if they conflict */
+.clients-section .service-client-logo {
     margin: 0;
     /* Let slider handle spacing via wrapper padding if needed, or justify-content */
     max-height: 50px;

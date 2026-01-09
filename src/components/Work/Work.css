@@ -84,10 +84,10 @@
 /* Responsive */
 @media (max-width: 768px) {
     .work-section {
-        padding: 60px 0;
+        padding: 45px 0;
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
-        margin-top: -50px;
+        margin-top: -30px;
     }
 
     .work-headline {

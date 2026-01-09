@@ -271,7 +271,7 @@ const Home = () => {
                                 From <span className="highlight-text">strategy to execution</span>, we provide full-stack digital solutions.
                             </h2>
                         </div>
-                        <div className="col-lg-5 text-lg-end position-relative">
+                        <div className="col-lg-5 text-lg-end position-relative mt-3">
                             <button className="btn-quote">REQUEST A QUOTE</button>
                         </div>
                         <img src={stickerGreatWork} alt="Great Work" className="great-work-sticker" />
