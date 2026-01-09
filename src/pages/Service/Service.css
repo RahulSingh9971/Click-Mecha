@@ -628,7 +628,7 @@
 /* Our Clients Section */
 .clients-section {
     /* padding: 6rem 0; */
-    background-color: #fffbf2;
+    /* background-color: #fffbf2; */
 }
 
 .clients-title {
@@ -706,7 +706,7 @@
 }
 
 /* Testimonials Styles (Ported from Home.css) */
-.testimonials-section {
+.service-testimonials-section {
     background-color: #ffffff;
     /* User requested White */
     padding: 100px 0 183px;
@@ -715,7 +715,7 @@
     z-index: 2;
 }
 
-.testimonials-headline {
+.service-testimonials-headline {
     font-family: 'Larken', system-ui, serif;
     font-size: 3rem;
     color: #0E1D28;
@@ -723,13 +723,13 @@
     line-height: 1.2;
 }
 
-.testimonials-headline .highlight-text {
+.service-testimonials-headline .highlight-text {
     color: #F7962D;
     font-style: italic;
     /* Matches Home style */
 }
 
-.rocket-icon {
+.service-rocket-icon {
     width: 107px;
     height: auto;
     position: absolute;
@@ -738,7 +738,7 @@
     z-index: 3;
 }
 
-.testimonial-card {
+.service-testimonial-card {
     background: #fffaf0;
     /* Light cream to contrast with white section */
     border-radius: 20px;
@@ -752,11 +752,11 @@
     transition: transform 0.3s ease;
 }
 
-.testimonial-card:hover {
+.service-testimonial-card:hover {
     transform: translateY(-5px);
 }
 
-.quote-icon {
+.service-quote-icon {
     font-size: 4rem;
     color: #F7962D;
     line-height: 1;
@@ -764,38 +764,38 @@
     margin-bottom: 20px;
 }
 
-.stars {
+.service-stars {
     color: #F7962D;
     font-size: 1.2rem;
     margin-bottom: 15px;
     letter-spacing: 2px;
 }
 
-.testimonial-title {
+.service-testimonial-title {
     font-size: 1.25rem;
     font-weight: 700;
     color: #0E1D28;
     margin-bottom: 15px;
 }
 
-.testimonial-desc {
+.service-testimonial-desc {
     color: #666;
     font-size: 0.95rem;
     line-height: 1.6;
 }
 
 /* Slider Dots customization */
-.testimonials-slider .slick-dots li button:before {
+.service-testimonials-slider .slick-dots li button:before {
     font-size: 10px;
     color: #ccc;
     opacity: 1;
 }
 
-.testimonials-slider .slick-dots li.slick-active button:before {
+.service-testimonials-slider .slick-dots li.slick-active button:before {
     color: #F7962D;
 }
 
-.testimonials-slider .slick-dots {
+.service-testimonials-slider .slick-dots {
     bottom: -40px;
 }
 

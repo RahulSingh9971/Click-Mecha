@@ -454,28 +454,28 @@ const Service = () => {
             </section>
 
             {/* Testimonials Section */}
-            <section className="testimonials-section position-relative">
-                {/* <img src={rocketIcon} alt="Rocket" className="rocket-icon" /> */}
+            <section className="service-testimonials-section position-relative">
+                {/* <img src={rocketIcon} alt="Rocket" className="service-rocket-icon" /> */}
                 <div className="container">
                     <div className="testimonials-header text-center mb-5 position-relative">
-                        <h2 className="testimonials-headline">
+                        <h2 className="service-testimonials-headline">
                             What it’s like to <br />
                             <span className="highlight-text">collaborate together</span>
                         </h2>
                     </div>
-                    <div className="testimonials-slider">
+                    <div className="service-testimonials-slider">
                         <Slider {...testimonialSettings}>
                             {testimonialsData.map((item, index) => (
                                 <div key={index} className="px-3">
-                                    <div className="testimonial-card">
-                                        <div className="quote-icon">“</div>
-                                        <div className="stars">
+                                    <div className="service-testimonial-card">
+                                        <div className="service-quote-icon">“</div>
+                                        <div className="service-stars">
                                             {[...Array(item.stars)].map((_, i) => (
                                                 <span key={i}>★</span>
                                             ))}
                                         </div>
-                                        <h3 className="testimonial-title">{item.title}</h3>
-                                        <p className="testimonial-desc">{item.text}</p>
+                                        <h3 className="service-testimonial-title">{item.title}</h3>
+                                        <p className="service-testimonial-desc">{item.text}</p>
                                     </div>
                                 </div>
                             ))}

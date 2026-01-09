@@ -1,7 +1,9 @@
 import React from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import './Home.css';
 import Work from '../../components/Work/Work';
 import Contact from '../../components/Contact/Contact';
@@ -300,13 +302,42 @@ const Home = () => {
                 <div className="container-fluid text-center">
                     <h2 className="clients-headline mb-5">Our Clients</h2>
                     <div className="slider-container">
-                        <Slider {...clientSettings}>
+                        <Swiper
+                            modules={[Autoplay]}
+                            spaceBetween={20}
+                            slidesPerView={5}
+                            loop={true}
+                            autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: false,
+                            }}
+                            speed={500}
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 2,
+                                },
+                                480: {
+                                    slidesPerView: 2,
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                },
+                                1024: {
+                                    slidesPerView: 4,
+                                },
+                                1280: {
+                                    slidesPerView: 5,
+                                }
+                            }}
+                        >
                             {clientLogos.map((logo, index) => (
-                                <div key={index} className="client-slide">
-                                    <img src={logo} alt={`Client ${index + 1}`} className="client-logo" />
-                                </div>
+                                <SwiperSlide key={index}>
+                                    <div className="client-slide">
+                                        <img src={logo} alt={`Client ${index + 1}`} className="client-logo" />
+                                    </div>
+                                </SwiperSlide>
                             ))}
-                        </Slider>
+                        </Swiper>
                     </div>
                 </div>
             </section>
@@ -322,9 +353,36 @@ const Home = () => {
                         </h2>
                     </div>
                     <div className="testimonials-slider">
-                        <Slider {...testimonialSettings}>
+                        <Swiper
+                            modules={[Autoplay, Pagination]}
+                            spaceBetween={30}
+                            slidesPerView={3}
+                            loop={true}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            speed={500}
+                            breakpoints={{
+                                0: {
+                                    slidesPerView: 1,
+                                },
+                                768: {
+                                    slidesPerView: 1,
+                                },
+                                992: {
+                                    slidesPerView: 2,
+                                },
+                                1280: {
+                                    slidesPerView: 3,
+                                }
+                            }}
+                        >
                             {testimonialsData.map((item, index) => (
-                                <div key={index} className="px-3">
+                                <SwiperSlide key={index}>
                                     <div className="testimonial-card">
                                         <div className="quote-icon">“</div>
                                         <div className="stars">
@@ -335,9 +393,9 @@ const Home = () => {
                                         <h3 className="testimonial-title">{item.title}</h3>
                                         <p className="testimonial-desc">{item.text}</p>
                                     </div>
-                                </div>
+                                </SwiperSlide>
                             ))}
-                        </Slider>
+                        </Swiper>
                     </div>
                 </div>
             </section>
