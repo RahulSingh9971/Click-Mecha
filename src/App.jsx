@@ -25,10 +25,10 @@ function App() {
         <Route path="/services" element={<Service />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/post" element={<BlogPost />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/clientele" element={<Clientele />} />
         <Route path="/career" element={<Career />} />
-        <Route path="/career/detail" element={<CareerDetail />} />
+        <Route path="/career/:slug" element={<CareerDetail />} />
       </Routes>
       <Footer />
     </>

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 import { FaTiktok, FaInstagram, FaXTwitter, FaYoutube } from 'react-icons/fa6';
-import logo from '../../assets/logo.png'; // Assuming same logo or need a white version
+import logo from '../../assets/clickmecha-logo.png'; // Updated logo
 
 const Footer = () => {
     return (
@@ -36,12 +37,13 @@ const Footer = () => {
                     {/* Navigation Links */}
                     <div className="col-lg-3 col-md-6 mb-4">
                         <ul className="list-unstyled footer-links">
-                            <li><a href="#home">HOME</a></li>
-                            <li><a href="#services">SERVICES</a></li>
-                            <li><a href="#case-studies">CASE STUDIES</a></li>
-                            <li><a href="#about">ABOUT</a></li>
-                            <li><a href="#blog">BLOG</a></li>
-                            <li><a href="#contact">CONTACT</a></li>
+                            <li><Link to="/">HOME</Link></li>
+                            <li><Link to="/about">ABOUT</Link></li>
+                            <li><Link to="/services">SERVICES</Link></li>
+                            <li><Link to="/clientele">CLIENTELE</Link></li>
+                            <li><Link to="/career">CAREER</Link></li>
+                            <li><Link to="/blog">BLOG</Link></li>
+                            <li><Link to="/contact">CONTACT</Link></li>
                         </ul>
                     </div>
 

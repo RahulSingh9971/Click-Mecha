@@ -5,7 +5,11 @@ import avatars from '../../assets/service-images/avatars.png';
 import phones from '../../assets/service-images/phones.png';
 
 
-import Slider from "react-slick";
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import teamIcon from '../../assets/service-images/icon-team.png';
 import expIcon from '../../assets/service-images/icon-experience.png';
 import shopifyIcon from '../../assets/service-images/icon-shopify.png';
@@ -58,6 +62,7 @@ const Service = () => {
     ];
 
 
+    // Plans Configuration
     const plans = [
         {
             id: 1,
@@ -103,70 +108,7 @@ const Service = () => {
         }
     ];
 
-    const sliderSettings = {
-        dots: false,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: false, // Default off for desktop
-        responsive: [
-            {
-                breakpoint: 991, // Tablet/Mobile
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 3000,
-                    arrows: false
-                }
-            },
-            {
-                breakpoint: 576, // Small Mobile
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 3000,
-                    arrows: false
-                }
-            }
-        ]
-    };
-
-    const clientSliderSettings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: false,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 2,
-                    dots: false
-                }
-            }
-        ]
-    };
-
-
-    // Testimonials Data & Settings
+    // Testimonials Data
     const testimonialsData = [
         {
             title: "Consistent Execution",
@@ -189,31 +131,6 @@ const Service = () => {
             stars: 5
         }
     ];
-
-    const testimonialSettings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: false,
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    };
 
     return (
         <div className="service-page">
@@ -269,16 +186,30 @@ const Service = () => {
                     </div>
 
                     <div className="mobile-stats-slider d-lg-none">
-                        <Slider {...sliderSettings}>
+                        <Swiper
+                            modules={[Autoplay]}
+                            spaceBetween={20}
+                            slidesPerView={1}
+                            loop={true}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
+                            breakpoints={{
+                                576: {
+                                    slidesPerView: 2,
+                                }
+                            }}
+                        >
                             {stats.map((stat, index) => (
-                                <div key={index}>
+                                <SwiperSlide key={index}>
                                     <div className="stat-item">
                                         <img src={stat.icon} alt={stat.text} className="stat-icon" />
                                         <span className="stat-label">{stat.text}</span>
                                     </div>
-                                </div>
+                                </SwiperSlide>
                             ))}
-                        </Slider>
+                        </Swiper>
                     </div>
                 </div>
             </section>
@@ -426,29 +357,58 @@ const Service = () => {
                 <div className="container-fluid">
                     <h2 className="clients-title text-center">Our Clients</h2>
                     <div className="clients-slider-wrapper">
-                        <Slider {...clientSliderSettings}>
-                            <div className="client-logo-wrapper">
-                                <img src={clientTinder} alt="Tinder" className="service-client-logo" />
-                            </div>
-                            <div className="client-logo-wrapper">
-                                <img src={clientEa} alt="EA" className="service-client-logo" />
-                            </div>
-                            <div className="client-logo-wrapper">
-                                <img src={clientSlack} alt="Slack" className="service-client-logo" />
-                            </div>
-                            <div className="client-logo-wrapper">
-                                <img src={clientAmazon} alt="Amazon" className="service-client-logo" />
-                            </div>
-                            <div className="client-logo-wrapper">
-                                <img src={clientGoogle} alt="Google" className="service-client-logo" />
-                            </div>
-                            <div className="client-logo-wrapper">
-                                <img src={clientWalmart} alt="Walmart" className="service-client-logo" />
-                            </div>
-                            <div className="client-logo-wrapper">
-                                <img src={clientLinkedin} alt="LinkedIn" className="service-client-logo" />
-                            </div>
-                        </Slider>
+                        <Swiper
+                            modules={[Autoplay]}
+                            spaceBetween={30}
+                            slidesPerView={6}
+                            loop={true}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
+                            breakpoints={{
+                                0: { slidesPerView: 2 },
+                                480: { slidesPerView: 3 },
+                                768: { slidesPerView: 4 },
+                                1024: { slidesPerView: 6 }
+                            }}
+                        >
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientTinder} alt="Tinder" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientEa} alt="EA" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientSlack} alt="Slack" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientAmazon} alt="Amazon" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientGoogle} alt="Google" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientWalmart} alt="Walmart" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <div className="client-logo-wrapper">
+                                    <img src={clientLinkedin} alt="LinkedIn" className="service-client-logo" />
+                                </div>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </div>
             </section>
@@ -464,22 +424,41 @@ const Service = () => {
                         </h2>
                     </div>
                     <div className="service-testimonials-slider">
-                        <Slider {...testimonialSettings}>
+                        <Swiper
+                            modules={[Autoplay, Pagination]}
+                            spaceBetween={30}
+                            slidesPerView={3}
+                            loop={true}
+                            autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: false,
+                            }}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            breakpoints={{
+                                0: { slidesPerView: 1 },
+                                768: { slidesPerView: 2 },
+                                992: { slidesPerView: 3 }
+                            }}
+                        >
                             {testimonialsData.map((item, index) => (
-                                <div key={index} className="px-3">
-                                    <div className="service-testimonial-card">
-                                        <div className="service-quote-icon">“</div>
-                                        <div className="service-stars">
-                                            {[...Array(item.stars)].map((_, i) => (
-                                                <span key={i}>★</span>
-                                            ))}
+                                <SwiperSlide key={index}>
+                                    <div className="px-3">
+                                        <div className="service-testimonial-card">
+                                            <div className="service-quote-icon">“</div>
+                                            <div className="service-stars">
+                                                {[...Array(item.stars)].map((_, i) => (
+                                                    <span key={i}>★</span>
+                                                ))}
+                                            </div>
+                                            <h3 className="service-testimonial-title">{item.title}</h3>
+                                            <p className="service-testimonial-desc">{item.text}</p>
                                         </div>
-                                        <h3 className="service-testimonial-title">{item.title}</h3>
-                                        <p className="service-testimonial-desc">{item.text}</p>
                                     </div>
-                                </div>
+                                </SwiperSlide>
                             ))}
-                        </Slider>
+                        </Swiper>
                     </div>
                 </div>
             </section>

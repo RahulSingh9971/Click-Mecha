@@ -1,116 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Blog.css';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import Contact from '../../components/Contact/Contact';
 
-// Import images for blog posts
-import img1 from '../../assets/blog-images/blog-1.png';
-import img2 from '../../assets/blog-images/blog-2.png';
-import img3 from '../../assets/blog-images/blog-3.png';
-import img4 from '../../assets/blog-images/blog-4.png';
-import img5 from '../../assets/blog-images/blog-5.png';
-
-const blogData = [
-    {
-        id: 1,
-        category: 'DESIGN',
-        image: img1,
-        date: 'OCTOBER 8, 2024',
-        readTime: '3 MINUTE READ',
-        title: 'Why Good Design Always Beats Guesswork',
-        desc: 'Strong design drives clarity, improves conversions, and reduces friction. Learn why intentional UI decisions consistently outperform assumptions.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: true
-    },
-    {
-        id: 2,
-        category: 'MARKETING',
-        image: img2,
-        date: 'OCTOBER 6, 2024',
-        readTime: '3 MINUTE READ',
-        title: 'How Brands Win With Bold Storytelling',
-        desc: 'Great UI transforms complexity into clarity. Learn methods designers use to break down complicated systems and create intuitive dashboards users.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: true
-    },
-    {
-        id: 3,
-        category: 'DESIGN',
-        image: img3,
-        date: 'OCTOBER 5, 2024',
-        readTime: '3 MINUTE READ',
-        title: 'How Micro-Interactions Boost User Engagement',
-        desc: 'Subtle animations guide users, provide feedback, and increase delight. Discover how micro-interactions transform static interfaces into memorable experiences.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: false
-    },
-    {
-        id: 4,
-        category: 'AI TRENDS',
-        image: img4,
-        date: 'OCTOBER 4, 2024',
-        readTime: '3 MINUTE READ',
-        title: 'Power Of Simplicity In Digital Products',
-        desc: 'Clean interfaces reduce cognitive load, improve retention, and enhance experience. Learn how simplifying layouts makes digital products more intuitive.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: false
-    },
-    {
-        id: 5,
-        category: 'DESIGN',
-        image: img5,
-        date: 'OCTOBER 1, 2024',
-        readTime: '5 MINUTE READ',
-        title: 'Why Design Systems Build Faster Teams',
-        desc: 'Design systems create consistency, accelerate development, and reduce redesign cycles. See how scalable components empower teams to ship better.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: false
-    },
-    // Dummy extra data for pagination testing
-    {
-        id: 6,
-        category: 'MARKETING',
-        image: img1,
-        date: 'SEPTEMBER 28, 2024',
-        readTime: '4 MINUTE READ',
-        title: 'SEO Strategies for 2025',
-        desc: 'Stay ahead of the curve with these emerging SEO trends that will define search rankings next year.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: false
-    },
-    {
-        id: 7,
-        category: 'AI TRENDS',
-        image: img2,
-        date: 'SEPTEMBER 25, 2024',
-        readTime: '6 MINUTE READ',
-        title: 'The Future of AI in Web Development',
-        desc: 'How artificial intelligence is reshaping the way developers build and maintain modern web applications.',
-        author: 'TEAM CLICKMECHA',
-        isFeatured: false
-    }
-];
+// Fallback image if API doesn't provide one
+import fallbackImg from '../../assets/blog-images/blog-1.png';
 
 const Blog = () => {
     const [activeTab, setActiveTab] = useState('ALL');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
+    const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [totalPages, setTotalPages] = useState(1);
+    const [error, setError] = useState(null);
+
+    const itemsPerPage = 5; // Used for calculation if needed, but API controls per_page really
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            setLoading(true);
+            try {
+                // Construct URL with pagination
+                // The API documentation specifies: GET /blogs?page={page}&search={search}
+                const response = await fetch(`https://cms.clickmecha.com/api/blogs?page=${currentPage}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+
+                if (result.status && result.data) {
+                    // New API Response Structure: 
+                    // result.data = { current_page, data: [], total, per_page }
+                    const paginationData = result.data;
+                    const blogsArray = paginationData.data || [];
+
+                    // Transform API data to match UI component structure
+                    const transformedBlogs = blogsArray.map(blog => ({
+                        id: blog.id,
+                        category: blog.category ? blog.category.name : 'GENERAL',
+                        image: blog.image_url || fallbackImg,
+                        date: blog.date ? new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'RECENT',
+                        readTime: '3 MINUTE READ', // Not in new API spec, defaulting
+                        title: blog.title,
+                        desc: (blog.desc || '').replace(/<[^>]+>/g, ''),
+                        author: blog.author ? blog.author.name : 'TEAM CLICKMECHA',
+                        slug: blog.slug
+                    }));
+
+                    setBlogs(transformedBlogs);
+
+                    // Update total pages based on API total and per_page
+                    const totalProxy = paginationData.total || 0;
+                    const perPageProxy = paginationData.per_page || 10;
+                    setTotalPages(Math.ceil(totalProxy / perPageProxy));
+                } else {
+                    setBlogs([]);
+                }
+            } catch (err) {
+                console.error("Error fetching blogs:", err);
+                setError("Failed to load blogs.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBlogs();
+    }, [currentPage]); // Re-fetch when page changes
 
     const tabs = ['ALL', 'LATEST', 'AI TRENDS', 'MARKETING', 'DESIGN'];
 
-    // Filter Logic
-    const filteredPosts = activeTab === 'ALL' || activeTab === 'LATEST'
-        ? blogData
-        : blogData.filter(post => post.category === activeTab);
-
-    // Pagination Logic
-    const totalPages = Math.ceil(filteredPosts.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentPosts = filteredPosts.slice(startIndex, startIndex + itemsPerPage);
+    // Note: The API currently only supports 'page' and 'search'. 
+    // Category filtering is not supported server-side yet.
+    // We will display all fetched blogs regardless of tab for now, 
+    // or we could filter client-side if the page size was large enough, 
+    // but for paginated data, client-side filtering is incomplete.
+    // For now, we pass 'blogs' directly.
+    const currentPosts = blogs;
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
-        setCurrentPage(1); // Reset to first page on filter change
+        setCurrentPage(1);
+        // In the future, pass 'tab' as a category param to the API
     };
 
     const handlePageChange = (page) => {
@@ -120,11 +92,21 @@ const Blog = () => {
         }
     };
 
+    if (loading) {
+        return (
+            <div className="blog-page">
+                <div className="container text-center" style={{ padding: '100px 0' }}>
+                    <h2>Loading stories...</h2>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="blog-page">
             <div className="container">
 
-                {/* Filter Tabs */}
+                {/* Filter Tabs - UI Only for now until API supports Category */}
                 <div className="blog-tabs-wrapper">
                     <div className="blog-tabs">
                         {tabs.map(tab => (
@@ -142,37 +124,41 @@ const Blog = () => {
                 {/* Content Area */}
                 <div className="blog-content">
                     {/* If page 1 and ALL/LATEST, show specific layout (2 Featured + Grid) */}
-                    {/* For simplicity and matching design, we'll render first 2 as featured if on page 1, else all grid */}
 
                     <div className="row g-4 mb-5">
-                        {currentPosts.map((post, index) => {
-                            // First 2 items on Page 1 get full width featured treatment (col-lg-6)
-                            // The rest get grid treatment (col-lg-4)
-                            // This logic mimics the design where the top 2 are distinct
-                            const isFeaturedDisplay = currentPage === 1 && index < 2;
+                        {currentPosts.length > 0 ? (
+                            currentPosts.map((post, index) => {
+                                // First 2 items on Page 1 get full width featured treatment (col-lg-6)
+                                // Only if we are on the first page
+                                const isFeaturedDisplay = currentPage === 1 && index < 2;
 
-                            return (
-                                <div key={post.id} className={isFeaturedDisplay ? "col-lg-6" : "col-lg-4 col-md-6"}>
-                                    <div className={`blog-card ${isFeaturedDisplay ? 'featured-card' : ''}`}>
-                                        <div className="blog-img-wrapper">
-                                            <img src={post.image} alt={post.title} className="blog-img" />
-                                        </div>
-                                        <div className="blog-body">
-                                            <div className="blog-meta">
-                                                {post.date}, {post.readTime}
+                                return (
+                                    <div key={post.id} className={isFeaturedDisplay ? "col-lg-6" : "col-lg-4 col-md-6"}>
+                                        <div className={`blog-card ${isFeaturedDisplay ? 'featured-card' : ''}`}>
+                                            <div className="blog-img-wrapper">
+                                                <img src={post.image} alt={post.title} className="blog-img" />
                                             </div>
-                                            <h3 className="blog-title">{post.title}</h3>
-                                            <p className="blog-desc">{post.desc}</p>
+                                            <div className="blog-body">
+                                                <div className="blog-meta">
+                                                    {post.date}, {post.readTime}
+                                                </div>
+                                                <h3 className="blog-title">{post.title}</h3>
+                                                <p className="blog-desc">{post.desc}</p>
 
-                                            <div className="blog-footer">
-                                                <Link to="/blog/post" className="read-more-link">Read More</Link>
-                                                <span className="blog-author-badge">{post.author}</span>
+                                                <div className="blog-footer">
+                                                    <Link to={`/blog/${post.slug || '#'}`} className="read-more-link">Read More</Link>
+                                                    <span className="blog-author-badge">{post.author}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })
+                        ) : (
+                            <div className="text-center w-100 py-5">
+                                <h3>No posts found.</h3>
+                            </div>
+                        )}
                     </div>
 
                     {/* Pagination */}
@@ -196,7 +182,6 @@ const Blog = () => {
                                         {i + 1}
                                     </button>
                                 ))}
-                                {/* Mock high numbers if needed to look like image, but functional is better */}
                             </div>
 
                             <button
@@ -210,6 +195,7 @@ const Blog = () => {
                     )}
                 </div>
             </div>
+            <Contact />
         </div>
     );
 };

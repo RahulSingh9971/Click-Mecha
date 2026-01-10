@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Work.css';
 import projectMadhusudan from '../../assets/work/project-madhusudan.png';
 import projectNeelgagan from '../../assets/work/project-neelgagan.png';
@@ -69,6 +70,13 @@ const Work = () => {
                                 </div>
                             ))}
                         </div>
+
+                        <div className="text-center mt-5">
+                            <Link to="/clientele">
+                                <button className="btn-journey">See More</button>
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
             </div>

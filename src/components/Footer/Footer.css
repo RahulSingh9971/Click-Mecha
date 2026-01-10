@@ -46,7 +46,7 @@
 }
 
 .copyright {
-    color: #889bb0;
+    color: #fff !important;
     font-size: 0.85rem;
     line-height: 1.5;
 }

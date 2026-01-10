@@ -103,7 +103,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .header {
-        padding: 1rem 1.5rem;
+        padding: 1rem 5px;
     }
 
     .mobile-menu-icon {

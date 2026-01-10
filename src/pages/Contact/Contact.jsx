@@ -1,9 +1,159 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Contact.css';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import mapImage from '../../assets/contact-images/map.png'; // Imported the uploaded map image
+import mapImage from '../../assets/contact-images/map.png';
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        company_name: '',
+        budget: '',
+        message: '',
+        services: [],
+        agree: false
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [responseMessage, setResponseMessage] = useState({ type: '', text: '' });
+
+    // Handle input changes
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    // Handle checkbox changes for services
+    const handleServiceChange = (e) => {
+        const { value, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            services: checked
+                ? [...prev.services, value]
+                : prev.services.filter(service => service !== value)
+        }));
+    };
+
+    // Handle consent checkbox
+    const handleConsentChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            agree: e.target.checked
+        }));
+    };
+
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setResponseMessage({ type: '', text: '' });
+
+        // Validation
+        if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+            setResponseMessage({
+                type: 'error',
+                text: 'Please fill in all required fields (Name, Email, Phone, and Message)'
+            });
+            return;
+        }
+
+        if (!formData.agree) {
+            setResponseMessage({
+                type: 'error',
+                text: 'Please agree to be contacted about your project'
+            });
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            // Prepare data for API
+            const apiData = {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                company_name: formData.company_name || undefined,
+                budget: formData.budget || undefined,
+                services: formData.services.length > 0 ? formData.services : undefined,
+                message: formData.message,
+                agree: formData.agree ? 'yes' : 'no'
+            };
+
+            console.log('Sending data:', apiData);
+
+            // Make API call
+            const response = await fetch('https://cms.clickmecha.com/api/contact-submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(apiData)
+            });
+
+            console.log('Response status:', response.status);
+
+            // Log all headers for debugging
+            console.log('Response Headers:');
+            response.headers.forEach((value, key) => {
+                console.log(`${key}: ${value}`);
+            });
+
+            const contentType = response.headers.get("content-type");
+            let data;
+
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                console.error('Non-JSON response:', text);
+                throw new Error(`Server returned status ${response.status}: ${text.substring(0, 100)}...`);
+            }
+
+            if (response.ok && data.status) {
+                setResponseMessage({
+                    type: 'success',
+                    text: data.message || 'Thank you! Your query has been submitted successfully.'
+                });
+
+                // Reset form
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    company_name: '',
+                    budget: '',
+                    message: '',
+                    services: [],
+                    agree: false
+                });
+            } else {
+                let errorText = data.message || `Server error: ${response.status}`;
+                if (data.errors) {
+                    // If there are validation errors, append them
+                    const validations = Object.values(data.errors).flat().join(', ');
+                    errorText += ` (${validations})`;
+                }
+                setResponseMessage({
+                    type: 'error',
+                    text: errorText
+                });
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            setResponseMessage({
+                type: 'error',
+                text: `Error: ${error.message}. Check console for details.`
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="contact-page-wrapper">
             {/* Hero Section */}
@@ -29,19 +179,57 @@ const Contact = () => {
                                 Send your Query <span className="stars-icon">✨</span>
                             </h2>
 
-                            <form className="query-form">
+                            {/* Response Message */}
+                            {responseMessage.text && (
+                                <div className={`alert ${responseMessage.type === 'success' ? 'alert-success' : 'alert-danger'} mt-3`}>
+                                    {responseMessage.text}
+                                </div>
+                            )}
+
+                            <form className="query-form" onSubmit={handleSubmit}>
                                 <div className="row g-3">
                                     <div className="col-md-6">
-                                        <input type="text" className="form-control custom-input" placeholder="Full Name" />
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            className="form-control custom-input"
+                                            placeholder="Full Name *"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="col-md-6">
-                                        <input type="email" className="form-control custom-input" placeholder="Email Address" />
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            className="form-control custom-input"
+                                            placeholder="Email Address *"
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="col-md-6">
-                                        <input type="tel" className="form-control custom-input" placeholder="Phone Number" />
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            className="form-control custom-input"
+                                            placeholder="Phone Number *"
+                                            value={formData.phone}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="col-md-6">
-                                        <input type="text" className="form-control custom-input" placeholder="Company Name" />
+                                        <input
+                                            type="text"
+                                            name="company_name"
+                                            className="form-control custom-input"
+                                            placeholder="Company Name"
+                                            value={formData.company_name}
+                                            onChange={handleInputChange}
+                                        />
                                     </div>
                                 </div>
 
@@ -51,78 +239,157 @@ const Contact = () => {
                                     <div className="row mt-2">
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="branding" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="branding"
+                                                    value="Branding"
+                                                    checked={formData.services.includes('Branding')}
+                                                    onChange={handleServiceChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="branding">Branding</label>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="uiux" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="uiux"
+                                                    value="UI/UX Design"
+                                                    checked={formData.services.includes('UI/UX Design')}
+                                                    onChange={handleServiceChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="uiux">UI/UX Design</label>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="graphic" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="graphic"
+                                                    value="Graphic Design"
+                                                    checked={formData.services.includes('Graphic Design')}
+                                                    onChange={handleServiceChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="graphic">Graphic Design</label>
                                             </div>
                                         </div>
 
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="appdev" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="appdev"
+                                                    value="App Development"
+                                                    checked={formData.services.includes('App Development')}
+                                                    onChange={handleServiceChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="appdev">App Development</label>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="webdev" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="webdev"
+                                                    value="Website Development"
+                                                    checked={formData.services.includes('Website Development')}
+                                                    onChange={handleServiceChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="webdev">Website Development</label>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="crm" />
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="crm"
+                                                    value="CRM & ERP Development"
+                                                    checked={formData.services.includes('CRM & ERP Development')}
+                                                    onChange={handleServiceChange}
+                                                />
                                                 <label className="form-check-label" htmlFor="crm">CRM & ERP Development</label>
                                             </div>
                                         </div>
 
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="marketing" />
-                                                <label className="form-check-label" htmlFor="marketing">Marketing</label>
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="social-marketing"
+                                                    value="Social Media Marketing"
+                                                    checked={formData.services.includes('Social Media Marketing')}
+                                                    onChange={handleServiceChange}
+                                                />
+                                                <label className="form-check-label" htmlFor="social-marketing">Social Media Marketing</label>
                                             </div>
                                         </div>
                                         <div className="col-md-4 mb-2">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="seo" />
-                                                <label className="form-check-label" htmlFor="seo">SEO</label>
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="seo"
+                                                    value="SEO (Search Engine Optimization)"
+                                                    checked={formData.services.includes('SEO (Search Engine Optimization)')}
+                                                    onChange={handleServiceChange}
+                                                />
+                                                <label className="form-check-label" htmlFor="seo">SEO (Search Engine Optimization)</label>
                                             </div>
                                         </div>
-                                        <div className="col-md-4 mb-2">
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="automations" />
-                                                <label className="form-check-label" htmlFor="automations">Automations</label>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div className="row g-3 mt-2">
                                     <div className="col-md-6">
-                                        <input type="text" className="form-control custom-input" placeholder="Budget Approx" />
+                                        <input
+                                            type="text"
+                                            name="budget"
+                                            className="form-control custom-input"
+                                            placeholder="Budget Approx"
+                                            value={formData.budget}
+                                            onChange={handleInputChange}
+                                        />
                                     </div>
                                     <div className="col-md-6">
-                                        <input type="text" className="form-control custom-input" placeholder="Tell us about the project" />
+                                        <input
+                                            type="text"
+                                            name="message"
+                                            className="form-control custom-input"
+                                            placeholder="Tell us about the project *"
+                                            value={formData.message}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
                                     </div>
                                 </div>
 
                                 <div className="form-check mt-4">
-                                    <input className="form-check-input" type="checkbox" id="consent" />
-                                    <label className="form-check-label" htmlFor="consent">I agree to be contacted about my project.</label>
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        id="consent"
+                                        checked={formData.agree}
+                                        onChange={handleConsentChange}
+                                        required
+                                    />
+                                    <label className="form-check-label" htmlFor="consent">I agree to be contacted about my project. *</label>
                                 </div>
 
-                                <button type="submit" className="btn-submit-query mt-4">SUBMIT QUERY</button>
+                                <button
+                                    type="submit"
+                                    className="btn-submit-query mt-4"
+                                    disabled={loading}
+                                >
+                                    {loading ? 'SUBMITTING...' : 'SUBMIT QUERY'}
+                                </button>
                             </form>
                         </div>
 
@@ -137,7 +404,7 @@ const Contact = () => {
                                     </div>
                                     <div className="info-text">
                                         <span className="label">PHONE NUMBER</span>
-                                        <p className="value">+91 98765 43210, +91 98765 43210</p>
+                                        <p className="value">+91 99990 08998</p>
                                     </div>
                                 </div>
 
@@ -146,8 +413,38 @@ const Contact = () => {
                                         <FaMapMarkerAlt />
                                     </div>
                                     <div className="info-text">
-                                        <span className="label">OFFICE ADDRESS</span>
+                                        <span className="label">OFFICE ADDRESS (HEAD OFFICE)</span>
                                         <p className="value">Best Sky Tower, 810, Netaji Subhash Place, Shakurpur, New Delhi, Delhi, 110034</p>
+                                    </div>
+                                </div>
+
+                                <div className="info-item">
+                                    <div className="info-icon-circle">
+                                        <FaMapMarkerAlt />
+                                    </div>
+                                    <div className="info-text">
+                                        <span className="label">OFFICE ADDRESS (NEW YORK)</span>
+                                        <p className="value">office no. 140, 60 East 42nd Street, New York, 10165</p>
+                                    </div>
+                                </div>
+
+                                <div className="info-item">
+                                    <div className="info-icon-circle">
+                                        <FaMapMarkerAlt />
+                                    </div>
+                                    <div className="info-text">
+                                        <span className="label">OFFICE ADDRESS (KAROL BAGH)</span>
+                                        <p className="value">Office no, 3, Arya Samaj Rd, near big biknervala, Block 18, WEA, Karol Bagh, New Delhi, Delhi, 110005</p>
+                                    </div>
+                                </div>
+
+                                <div className="info-item">
+                                    <div className="info-icon-circle">
+                                        <FaMapMarkerAlt />
+                                    </div>
+                                    <div className="info-text">
+                                        <span className="label">OFFICE ADDRESS (DUBAI)</span>
+                                        <p className="value">2nd floor, Aspin Commercial Tower - Office no -42 - Sheikh Zayed Rd - Trade Center First - Dubai - United Arab Emirates</p>
                                     </div>
                                 </div>
 
@@ -161,13 +458,18 @@ const Contact = () => {
                                     </div>
                                 </div>
 
-                                {/* Map Image */}
+                                {/* Map Embed */}
                                 <div className="map-container mt-4">
-                                    <img
-                                        src={mapImage}
-                                        alt="Office Location Map"
-                                        style={{ width: '100%', height: 'auto', borderRadius: '15px', display: 'block' }}
-                                    />
+                                    <iframe
+                                        title="ClickMecha Office Location"
+                                        src="https://maps.google.com/maps?q=Best%20Sky%20Tower%2C%20810%2C%20Netaji%20Subhash%20Place%2C%20Shakurpur%2C%20New%20Delhi%2C%20Delhi%20110034&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                        width="100%"
+                                        height="300"
+                                        style={{ border: 0, borderRadius: '15px' }}
+                                        allowFullScreen=""
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                    ></iframe>
                                 </div>
                             </div>
                         </div>

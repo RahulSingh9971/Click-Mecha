@@ -716,7 +716,7 @@
     }
 
     .testimonials-section {
-        padding: 45px 0 !important;
+        padding: 45px 0 84px !important;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         margin-top: -24px;
@@ -744,6 +744,7 @@
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         margin-top: -24px;
+        background-image: none !important;
     }
 
     .results-headline {
@@ -776,4 +777,22 @@
         top: auto;
         transform: none;
     }
+}
+
+.btn-journey {
+    background-color: #F7962D;
+    color: #0E1D28;
+    border: 2px solid #0E1D28;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 0px #0E1D28;
+    transition: all 0.1s;
+}
+
+.btn-journey:active {
+    box-shadow: 0px 0px 0px #0E1D28;
+    transform: translateY(4px);
 }

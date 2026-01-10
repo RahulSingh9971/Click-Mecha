@@ -1,7 +1,7 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 import { LuLightbulb, LuBrainCircuit, LuMoonStar, LuPhone, LuMail } from 'react-icons/lu';
 import './About.css';
 import kavyaImg from '../../assets/about-image/kavya-kapoor.png';
@@ -13,35 +13,6 @@ import teamWorkingImg from '../../assets/about-image/team-working.png';
 import curvedArrowImg from '../../assets/about-image/curved-arrow.png';
 
 const About = () => {
-
-    // Slider Settings
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
 
     return (
         <div className="about-page">
@@ -191,54 +162,83 @@ const About = () => {
                     <div className="mt-5 pt-4">
                         <h2 className="story-heading text-center mb-5">Milestone Timeline</h2>
                         <div className="timeline-cards-row">
-                            <Slider {...settings}>
+                            <Swiper
+                                modules={[Autoplay]}
+                                spaceBetween={30}
+                                slidesPerView={3}
+                                loop={true}
+                                autoplay={{
+                                    delay: 3000,
+                                    disableOnInteraction: false,
+                                }}
+                                breakpoints={{
+                                    0: {
+                                        slidesPerView: 1,
+                                    },
+                                    768: {
+                                        slidesPerView: 2,
+                                    },
+                                    1200: {
+                                        slidesPerView: 3,
+                                    },
+                                }}
+                                className="timeline-slider"
+                            >
                                 {/* Card 1 */}
-                                <div className="timeline-card-wrapper">
-                                    <div className="timeline-card">
-                                        <span className="timeline-badge badge-early-days">EARLY DAYS</span>
-                                        <h3 className="timeline-title">A laptop, a pitch, and endless curiosity</h3>
-                                        <p className="timeline-text">
-                                            Kavya began pitching with nothing but ideas. The constant questioning of ads
-                                            became his advantage.
-                                        </p>
+                                <SwiperSlide>
+                                    <div className="timeline-card-wrapper">
+                                        <div className="timeline-card">
+                                            <span className="timeline-badge badge-early-days">EARLY DAYS</span>
+                                            <h3 className="timeline-title">A laptop, a pitch, and endless curiosity</h3>
+                                            <p className="timeline-text">
+                                                Kavya began pitching with nothing but ideas. The constant questioning of ads
+                                                became his advantage.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                </SwiperSlide>
 
                                 {/* Card 2 */}
-                                <div className="timeline-card-wrapper">
-                                    <div className="timeline-card">
-                                        <span className="timeline-badge badge-growth">GROWTH</span>
-                                        <h3 className="timeline-title">From small brands to big names</h3>
-                                        <p className="timeline-text">
-                                            Bold work, clear results, and unapologetic creativity attracted bigger brands.
-                                        </p>
+                                <SwiperSlide>
+                                    <div className="timeline-card-wrapper">
+                                        <div className="timeline-card">
+                                            <span className="timeline-badge badge-growth">GROWTH</span>
+                                            <h3 className="timeline-title">From small brands to big names</h3>
+                                            <p className="timeline-text">
+                                                Bold work, clear results, and unapologetic creativity attracted bigger brands.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                </SwiperSlide>
 
                                 {/* Card 3 */}
-                                <div className="timeline-card-wrapper">
-                                    <div className="timeline-card">
-                                        <span className="timeline-badge badge-the-break">THE BREAK</span>
-                                        <h3 className="timeline-title">Free overnight campaign</h3>
-                                        <p className="timeline-text">
-                                            Building a full campaign for free and walking it into a client’s office turned
-                                            a rejection into opportunity.
-                                        </p>
+                                <SwiperSlide>
+                                    <div className="timeline-card-wrapper">
+                                        <div className="timeline-card">
+                                            <span className="timeline-badge badge-the-break">THE BREAK</span>
+                                            <h3 className="timeline-title">Free overnight campaign</h3>
+                                            <p className="timeline-text">
+                                                Building a full campaign for free and walking it into a client’s office turned
+                                                a rejection into opportunity.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                </SwiperSlide>
 
                                 {/* Card 4 */}
-                                <div className="timeline-card-wrapper">
-                                    <div className="timeline-card">
-                                        <span className="timeline-badge badge-today">TODAY</span>
-                                        <h3 className="timeline-title">A culture of courage</h3>
-                                        <p className="timeline-text">
-                                            We still do things with the same hunger. We still drive results for every client
-                                            with the courage that started it all.
-                                        </p>
+                                <SwiperSlide>
+                                    <div className="timeline-card-wrapper">
+                                        <div className="timeline-card">
+                                            <span className="timeline-badge badge-today">TODAY</span>
+                                            <h3 className="timeline-title">A culture of courage</h3>
+                                            <p className="timeline-text">
+                                                We still do things with the same hunger. We still drive results for every client
+                                                with the courage that started it all.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Slider>
+                                </SwiperSlide>
+                            </Swiper>
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@ const About = () => {
                         </div>
                     </div>
 
-                    <div className="row gx-5 mb-5 pb-5">
+                    <div className="row gx-5  pb-5">
                         {/* Item 1 */}
                         <div className="col-lg-4 mb-4 mb-lg-0 text-center text-lg-start">
                             <div className="icon-box mb-4">
@@ -307,19 +307,19 @@ const About = () => {
                                 <img src={teamWorkingImg} alt="Team Working" className="img-fluid rounded-4" />
                             </div>
                         </div>
-                        <div className="col-lg-6 bg-light-creme p-5 rounded-4 position-relative">
+                        <div className="col-lg-6 bg-light-creme p-lg-5 p-1 rounded-4 position-relative">
                             <div className="emotional-content">
                                 <h2 className="story-heading mb-4 position-relative d-inline-block">
                                     The Emotional Core <br />
                                     Behind the Brand
                                     <img src={curvedArrowImg} alt="arrow" className="curved-arrow-icon" />
                                 </h2>
-                                <p className="about-text mb-5">
+                                <p className="about-text mb-3 mb-lg-5">
                                     Nights of doubt, shoestring budgets, and the small victories that shaped a leader.
                                     Every struggle taught resilience and gratitude.
                                 </p>
 
-                                <ul className="core-values-list list-unstyled mb-5">
+                                <ul className="core-values-list list-unstyled mb-3 mb-lg-5">
                                     <li className="mb-3">Designed the first logo himself due to budget limits</li>
                                     <li className="mb-3">Waited for clients who never showed up</li>
                                     <li className="mb-3">Felt the weight of family expectations</li>

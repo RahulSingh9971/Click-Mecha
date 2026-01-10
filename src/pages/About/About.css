@@ -111,7 +111,30 @@ section.meet-kavya-section {
 
 @media (max-width: 768px) {
     .about-title {
-        font-size: 2.5rem;
+        font-size: 28px;
+    }
+
+    section.meet-kavya-section {
+        margin-top: -44px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .turning-point-section {
+        margin: 10px !important;
+        padding: 45px 0px !important;
+    }
+
+    .about-page {
+        overflow: hidden;
+    }
+
+    section.who-we-are-section.section-padding {
+        overflow: hidden;
+    }
+
+    section.story-section {
+        overflow: hidden;
     }
 
     .about-subheading {
@@ -129,6 +152,16 @@ section.meet-kavya-section {
     .section-padding {
         padding-top: 3rem;
         padding-bottom: 3rem;
+    }
+
+    /* Center Who We Are items on mobile */
+    .icon-box {
+        margin: 0 auto 1.5rem !important;
+    }
+
+    .value-title,
+    .value-desc {
+        text-align: center;
     }
 }
 
@@ -162,11 +195,7 @@ section.meet-kavya-section {
     z-index: 1;
 }
 
-/* Slider Overrides */
-.timeline-cards-row {
-    padding-bottom: 3rem;
-    /* Space for dots */
-}
+
 
 .turning-point-content .slick-slide {
     padding: 0 15px;
@@ -442,7 +471,7 @@ section.meet-kavya-section {
     }
 
     .cta-card {
-        padding: 3rem 1.5rem;
+        padding: 45px 7px;
     }
 
     .cta-title {

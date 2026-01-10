@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -58,6 +59,11 @@ const Home = () => {
     // Services Data
     const servicesData = [
         {
+            title: "Social Media Marketing",
+            desc: "Amplify Your Brand's Voice: ClickMecha's social media marketing strategies are tailored for impact.",
+            icon: iconUI
+        },
+        {
             title: "Website Development",
             desc: "Responsive, SEO-optimized websites built with performance in mind.",
             icon: iconWeb
@@ -73,20 +79,16 @@ const Home = () => {
             icon: iconUI
         },
         {
-            title: "Digital Marketing",
-            desc: "Data-driven SEO, ads, and content strategies that attract traffic and convert leads.",
+            title: "Push Notifications",
+            desc: "Send timely updates and engage your audience with personalized notifications.",
             icon: iconMarketing
         },
         {
             title: "E-Commerce Solutions",
             desc: "Conversion-focused online stores with secure payments and smooth shopping experiences.",
             icon: iconWeb
-        },
-        {
-            title: "Social Media Marketing",
-            desc: "Amplify Your Brand's Voice: ClickMecha's social media marketing strategies are tailored for impact.",
-            icon: iconUI
         }
+
     ];
 
     // Clients Slider Settings
@@ -191,7 +193,7 @@ const Home = () => {
                                 Platforms
                             </h1>
                         </div>
-                        <div className="col-lg-5 d-none d-lg-block position-relative">
+                        {/* <div className="col-lg-5 d-none d-lg-block position-relative">
                             <div className="circle-badge fade-in-right delay-2">
                                 <div className="circle-text-wrapper">
                                     <svg viewBox="0 0 100 100" width="100" height="100" className="rotating-text">
@@ -207,7 +209,7 @@ const Home = () => {
                                     <img src={heroAvatar} alt="Avatar" className="center-avatar" />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -216,11 +218,22 @@ const Home = () => {
                 </div>
 
                 <div className="hero-floating-desc">
-                    <p>
-                        We design, build, and market<br />
+                    <p className="d-none d-md-block">
+                        We design, build, and market<  br />
                         digital solutions that help<br />
                         businesses grow faster.
                     </p>
+                    <p className="d-md-none">
+                        We design, build, and market
+                        digital solutions that help
+                        businesses grow faster.
+                    </p>
+                    <button
+                        className="btn-journey d-md-none"
+                        onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                    >
+                        Start A Journey
+                    </button>
                 </div>
             </section>
 
@@ -273,10 +286,10 @@ const Home = () => {
                                 From <span className="highlight-text">strategy to execution</span>, we provide full-stack digital solutions.
                             </h2>
                         </div>
-                        <div className="col-lg-5 text-lg-end position-relative mt-3">
+                        <div className="col-lg-5 text-lg-end text-center position-relative mt-3">
                             <button className="btn-quote">REQUEST A QUOTE</button>
                         </div>
-                        <img src={stickerGreatWork} alt="Great Work" className="great-work-sticker" />
+                        <img src={stickerGreatWork} alt="Great Work" className="great-work-sticker d-none d-md-block" />
                     </div>
                     <div className="row g-4">
                         {servicesData.map((service, index) => (
@@ -291,6 +304,12 @@ const Home = () => {
                             </div>
                         ))}
                     </div>
+                    {/* 
+                    <div className="text-center mt-5">
+                        <Link to="/services">
+                            <button className="btn-journey">See More</button>
+                        </Link>
+                    </div> */}
                 </div>
             </section>
 
@@ -462,7 +481,7 @@ const Home = () => {
                                     We’re a team of developers, designers, and marketers helping 200+ businesses worldwide. With 300+ projects delivered, our mission is simple: turn your digital vision into a reality.
                                 </p>
                             </div>
-                            <img src={baburaoSticker} alt="Baburao Style" className="baburao-sticker" />
+                            {/* <img src={baburaoSticker} alt="Baburao Style" className="baburao-sticker" /> */}
                         </div>
                     </div>
                 </div>

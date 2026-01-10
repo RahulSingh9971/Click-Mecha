@@ -1,50 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Clientele.css';
 
-// Importing existing logos to simulate the grid
-import logoAmazon from '../../assets/service-images/logo-amazon.png';
-import logoGoogle from '../../assets/service-images/logo-google.png';
-import logoTinder from '../../assets/service-images/logo-tinder.png';
-import logoSack from '../../assets/service-images/logo-slack.png';
-import logoEA from '../../assets/service-images/logo-ea.png';
-import logoWalmart from '../../assets/service-images/logo-walmart.png';
-import logoLinkedin from '../../assets/service-images/logo-linkedin.png';
-
-// Creating a list of logos to display (repeating to likely match the volume in the image)
-const clientLogos = [
-    { id: 1, src: logoAmazon, alt: 'ITC Limited' }, // Mapping to image mental model
-    { id: 2, src: logoGoogle, alt: 'Kalpataru' },
-    { id: 3, src: logoTinder, alt: 'Kamani' },
-    { id: 4, src: logoSack, alt: 'Kanakia' },
-    { id: 5, src: logoEA, alt: 'MTV' },
-    { id: 6, src: logoWalmart, alt: 'UTV' },
-    { id: 7, src: logoLinkedin, alt: 'NDTV' },
-    { id: 8, src: logoAmazon, alt: 'Viacom18' },
-    { id: 9, src: logoGoogle, alt: 'Flipkart' },
-    { id: 10, src: logoTinder, alt: 'Movies Now' },
-    { id: 11, src: logoSack, alt: 'ET Now' },
-    { id: 12, src: logoEA, alt: 'Zoom' },
-    { id: 13, src: logoWalmart, alt: 'Radio Mirchi' },
-    { id: 14, src: logoLinkedin, alt: 'Lodha' },
-    { id: 15, src: logoAmazon, alt: 'Imagica' },
-    { id: 16, src: logoGoogle, alt: 'Rustomjee' },
-    { id: 17, src: logoTinder, alt: 'Titan' },
-    { id: 18, src: logoSack, alt: 'Voltas' },
-    { id: 19, src: logoEA, alt: 'Godrej' },
-    { id: 20, src: logoWalmart, alt: 'New India Assurance' },
-    { id: 21, src: logoLinkedin, alt: 'Piramal' },
-    { id: 22, src: logoAmazon, alt: 'Phoenix' },
-    { id: 23, src: logoGoogle, alt: 'Riso' },
-    { id: 24, src: logoTinder, alt: 'Rustomjee' },
-    { id: 25, src: logoSack, alt: 'Sahakari' },
-    { id: 26, src: logoEA, alt: 'Sony' },
-    { id: 27, src: logoWalmart, alt: 'Tata Housing' },
-    { id: 28, src: logoLinkedin, alt: 'Tata Value Homes' },
-    { id: 29, src: logoAmazon, alt: 'UTV Bindass' },
-    { id: 30, src: logoGoogle, alt: 'UTV Movies' },
-];
+import Contact from '../../components/Contact/Contact';
 
 const Clientele = () => {
+    const [clients, setClients] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await fetch('https://cms.clickmecha.com/api/clients');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+
+                if (result.status && Array.isArray(result.data)) {
+                    setClients(result.data);
+                } else {
+                    throw new Error('API returned unsuccessful status or invalid data format');
+                }
+            } catch (err) {
+                console.error("Error fetching clients:", err);
+                setError('Failed to load clients. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchClients();
+    }, []);
+
     return (
         <div className="clientele-page">
             <div className="container">
@@ -57,14 +45,21 @@ const Clientele = () => {
                     </p>
                 </div>
 
-                <div className="clientele-grid">
-                    {clientLogos.map((client) => (
-                        <div key={client.id} className="client-logo-card">
-                            <img src={client.src} alt={client.alt} className="client-logo-img" />
-                        </div>
-                    ))}
-                </div>
+                {loading && <div className="text-center my-5">Loading clients...</div>}
+
+                {error && <div className="text-center text-danger my-5">{error}</div>}
+
+                {!loading && !error && (
+                    <div className="clientele-grid">
+                        {clients.map((client) => (
+                            <div key={client.id} className="client-logo-card">
+                                <img src={client.logo_url} alt={client.name} className="client-logo-img" />
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
+            <Contact />
         </div>
     );
 };
