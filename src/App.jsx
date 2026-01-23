@@ -12,12 +12,16 @@ import BlogPost from './pages/BlogPost/BlogPost'
 import Clientele from './pages/Clientele/Clientele'
 import Career from './pages/Career/Career'
 import CareerDetail from './pages/CareerDetail/CareerDetail'
+import PoSH from './pages/PoSH/PoSH'
+
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,6 +33,7 @@ function App() {
         <Route path="/clientele" element={<Clientele />} />
         <Route path="/career" element={<Career />} />
         <Route path="/career/:slug" element={<CareerDetail />} />
+        <Route path="/posh-policy" element={<PoSH />} />
       </Routes>
       <Footer />
     </>

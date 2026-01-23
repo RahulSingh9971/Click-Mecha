@@ -34,7 +34,12 @@ const projects = [
     }
 ];
 
-const Work = () => {
+const Work = ({ workShowcase }) => {
+    // Fallback or empty if not provided
+    const projects = workShowcase || [];
+
+    if (!projects || projects.length === 0) return null;
+
     return (
         <section id="case-studies" className="work-section">
             <div className="container">
@@ -53,30 +58,23 @@ const Work = () => {
 
                         {/* Projects Grid */}
                         <div className="row g-4">
-                            {projects.map((project) => (
-                                <div key={project.id} className="col-md-6 mb-4">
+                            {projects.map((project, index) => (
+                                <div key={project.id || index} className="col-md-6 mb-4">
                                     <div className="project-card">
                                         <div className="project-image-wrapper">
-                                            <span className="project-tag">{project.tag}</span>
+                                            <span className="project-tag">{project.category || 'DEVELOPMENT'}</span>
                                             <img src={project.image} alt={project.title} className="project-image" />
                                         </div>
                                         <div className="project-info mt-4">
                                             <h3 className="project-title">{project.title}</h3>
                                             <p className="project-desc">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magnaaliqua. Ut enim ad minim veniam, quis n
+                                                {project.description}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-
-                        <div className="text-center mt-5">
-                            <Link to="/clientele">
-                                <button className="btn-journey">See More</button>
-                            </Link>
-                        </div>
-
                     </div>
                 </div>
             </div>

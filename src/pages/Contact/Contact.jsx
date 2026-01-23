@@ -410,6 +410,16 @@ const Contact = () => {
 
                                 <div className="info-item">
                                     <div className="info-icon-circle">
+                                        <FaPhoneAlt />
+                                    </div>
+                                    <div className="info-text">
+                                        <span className="label">PHONE NUMBER</span>
+                                        <p className="value">+91 99996 73073</p>
+                                    </div>
+                                </div>
+
+                                <div className="info-item">
+                                    <div className="info-icon-circle">
                                         <FaMapMarkerAlt />
                                     </div>
                                     <div className="info-text">
@@ -424,7 +434,7 @@ const Contact = () => {
                                     </div>
                                     <div className="info-text">
                                         <span className="label">OFFICE ADDRESS (NEW YORK)</span>
-                                        <p className="value">office no. 140, 60 East 42nd Street, New York, 10165</p>
+                                        <p className="value">Office no. 140, 60 East 42nd Street, New York, 10165</p>
                                     </div>
                                 </div>
 
@@ -445,6 +455,16 @@ const Contact = () => {
                                     <div className="info-text">
                                         <span className="label">OFFICE ADDRESS (DUBAI)</span>
                                         <p className="value">2nd floor, Aspin Commercial Tower - Office no -42 - Sheikh Zayed Rd - Trade Center First - Dubai - United Arab Emirates</p>
+                                    </div>
+                                </div>
+
+                                <div className="info-item">
+                                    <div className="info-icon-circle">
+                                        <FaEnvelope />
+                                    </div>
+                                    <div className="info-text">
+                                        <span className="label">EMAIL ADDRESS</span>
+                                        <p className="value">kavya@clickmecha.com</p>
                                     </div>
                                 </div>
 

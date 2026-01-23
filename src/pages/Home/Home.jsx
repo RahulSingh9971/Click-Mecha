@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -53,43 +53,35 @@ import growthBg from '../../assets/home-images/growth-bg.webp';
 
 
 const Home = () => {
+    const [homeData, setHomeData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [playingVideoId, setPlayingVideoId] = useState(null);
 
-    // === Data & Settings ===
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://cms.clickmecha.com/api/home');
+                const result = await response.json();
+                if (result.status && result.data) {
+                    setHomeData(result.data);
+                    // Set SEO Title
+                    if (result.data.seo && result.data.seo.meta_title) {
+                        document.title = result.data.seo.meta_title;
+                    }
+                } else {
+                    setError(result.message || 'Failed to fetch data');
+                }
+            } catch (err) {
+                console.error('Error fetching home data:', err);
+                setError('Network error');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    // Services Data
-    const servicesData = [
-        {
-            title: "Social Media Marketing",
-            desc: "Amplify Your Brand's Voice: ClickMecha's social media marketing strategies are tailored for impact.",
-            icon: iconUI
-        },
-        {
-            title: "Website Development",
-            desc: "Responsive, SEO-optimized websites built with performance in mind.",
-            icon: iconWeb
-        },
-        {
-            title: "Mobile App Development",
-            desc: "iOS and Android apps designed for seamless user experiences.",
-            icon: iconMobile
-        },
-        {
-            title: "UI/UX & Branding Design",
-            desc: "Modern, user-friendly designs and branding that make your business unforgettable.",
-            icon: iconUI
-        },
-        {
-            title: "Push Notifications",
-            desc: "Send timely updates and engage your audience with personalized notifications.",
-            icon: iconMarketing
-        },
-        {
-            title: "E-Commerce Solutions",
-            desc: "Conversion-focused online stores with secure payments and smooth shopping experiences.",
-            icon: iconWeb
-        }
-
-    ];
+        fetchData();
+    }, []);
 
     // Clients Slider Settings
     const clientSettings = {
@@ -124,31 +116,32 @@ const Home = () => {
             }
         ]
     };
-    const clientLogos = [logo1, logo2, logo3, logo4, logo5, logo6];
-
-    // Testimonials Data & Settings
-    const testimonialsData = [
-        {
-            title: "Consistent Execution",
-            text: "Smart strategies and consistent execution. Our engagement went up, and the campaigns finally felt aligned with our brand. Really impressed with the results.",
-            stars: 5
-        },
-        {
-            title: "Modern, and user-friendly",
-            text: "The designs were clean, modern, and user-friendly. They understood our product well and delivered a smooth experience that our users instantly appreciated.",
-            stars: 5
-        },
-        {
-            title: "Full ownership",
-            text: "A well-coordinated team aUI/UXss marketing, design, and development. They took full ownership of the project and delivered work that genuinely elevated our brand.",
-            stars: 5
-        },
-        {
-            title: "Consistent Execution",
-            text: "Smart strategies and consistent execution. Our engagement went up, and the campaigns finally felt aligned with our brand. Really impressed with the results.",
-            stars: 5
-        }
+    // Use API data or fallback to static
+    const clientLogos = homeData && homeData.clients ? homeData.clients : [
+        { logo: logo1 }, { logo: logo2 }, { logo: logo3 }, { logo: logo4 }, { logo: logo5 }, { logo: logo6 }
     ];
+
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                <div className="text-danger">Error: {error}</div>
+            </div>
+        );
+    }
+
+    if (!homeData) return null;
+
+
 
     const testimonialSettings = {
         dots: true,
@@ -179,37 +172,20 @@ const Home = () => {
     return (
         <main>
             {/* === Hero Section === */}
-            <section id="home" className="hero-section" style={{ backgroundImage: `url(${heroBg})` }}>
+            <section id="home" className="hero-section" style={{ backgroundImage: `url(${homeData.hero.image || heroBg})` }}>
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-7 col-md-12 hero-content">
                             <div className="rating-pill mb-4 fade-in-up">
                                 <img src={heroRatingGroup} alt="Rating Avatars" className="rating-avatars" />
-                                <span className="rating-text">4.9 Rated by 450+ Successful B2B Owners</span>
+                                <span className="rating-text">{homeData.hero.subtitle}</span>
                             </div>
-                            <h1 className="hero-title mb-4 fade-in-up delay-1">
-                                Turning Ideas Into <br className="d-none d-md-block" />
-                                <span className="highlight-text">Impactful Digital</span> <br className="d-none d-md-block" />
-                                Platforms
-                            </h1>
+                            <h1 className="hero-title mb-4 fade-in-up delay-1" dangerouslySetInnerHTML={{ __html: homeData.hero.title }} />
+
+                            <a href={homeData.hero.button_link} className="btn-journey d-none d-md-inline-block text-decoration-none text-center d-inline-block">
+                                {homeData.hero.button_text}
+                            </a>
                         </div>
-                        {/* <div className="col-lg-5 d-none d-lg-block position-relative">
-                            <div className="circle-badge fade-in-right delay-2">
-                                <div className="circle-text-wrapper">
-                                    <svg viewBox="0 0 100 100" width="100" height="100" className="rotating-text">
-                                        <defs>
-                                            <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-                                        </defs>
-                                        <text fontSize="11">
-                                            <textPath xlinkHref="#circle">
-                                                Start Your Journey - Start Your Journey -
-                                            </textPath>
-                                        </text>
-                                    </svg>
-                                    <img src={heroAvatar} alt="Avatar" className="center-avatar" />
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
 
@@ -218,22 +194,11 @@ const Home = () => {
                 </div>
 
                 <div className="hero-floating-desc">
-                    <p className="d-none d-md-block">
-                        We design, build, and market<  br />
-                        digital solutions that help<br />
-                        businesses grow faster.
-                    </p>
-                    <p className="d-md-none">
-                        We design, build, and market
-                        digital solutions that help
-                        businesses grow faster.
-                    </p>
-                    <button
-                        className="btn-journey d-md-none"
-                        onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                    >
-                        Start A Journey
-                    </button>
+                    <p className="d-none d-md-none" dangerouslySetInnerHTML={{ __html: homeData.hero.description }} />
+                    <p className="d-md-none" dangerouslySetInnerHTML={{ __html: homeData.hero.description }} />
+                    <a href={homeData.hero.button_link} className="btn-journey d-md-none text-decoration-none text-center d-inline-block">
+                        {homeData.hero.button_text}
+                    </a>
                 </div>
             </section>
 
@@ -243,36 +208,25 @@ const Home = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                                <span className="section-label">WHO WE ARE</span>
+                                <span className="section-label">{homeData.about.title}</span>
                             </div>
                             <div className="col-lg-9 col-md-12">
-                                <h2 className="about-headline mb-5">
-                                    Click Mecha helps startups and businesses build platforms that <br className="d-none d-lg-block" />
-                                    <span className="highlight-text">attract, convert, and retain customers</span>
-                                </h2>
+                                <div dangerouslySetInnerHTML={{ __html: homeData.about.subtitle }} />
                                 <div className="about-image-container mb-5">
-                                    <img src={officeImage} alt="Modern Office" className="img-fluid rounded-4 w-100" />
+                                    <img src={homeData.about.image || officeImage} alt="About Us" className="img-fluid rounded-4 w-100" />
                                 </div>
                                 <div className="row stats-row">
                                     <div className="col-md-6 mb-4 mb-md-0">
-                                        <h3 className="stat-number">230+</h3>
-                                        <p className="stat-desc">
-                                            Clients served worldwide across industries (tech, retail, healthcare, education).
-                                        </p>
+                                        <div dangerouslySetInnerHTML={{ __html: homeData.about.content }} />
                                     </div>
-                                    <div className="col-md-6">
-                                        <h3 className="stat-number">2010</h3>
-                                        <p className="stat-desc">
-                                            Since 2010 helping businesses turn ideas into scalable digital platforms.
-                                        </p>
+                                    <div className="col-md-6 mb-4 mb-md-0">
+                                        <div dangerouslySetInnerHTML={{ __html: homeData.about.content_2 }} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="about-blur-bg">
-                        <img src={aboutBgBlur} alt="" />
-                    </div>
+
                 </section>
                 <img src={bottomImage} alt="" className="about-bottom-image" />
             </>
@@ -287,19 +241,22 @@ const Home = () => {
                             </h2>
                         </div>
                         <div className="col-lg-5 text-lg-end text-center position-relative mt-3">
-                            <button className="btn-quote">REQUEST A QUOTE</button>
+                            {/* <Link to="/contact">
+                                <button className="btn-quote">REQUEST A QUOTE</button>
+                            </Link> */}
                         </div>
-                        <img src={stickerGreatWork} alt="Great Work" className="great-work-sticker d-none d-md-block" />
+                        {/* <img src={stickerGreatWork} alt="Great Work" className="great-work-sticker d-none d-md-block" /> */}
                     </div>
                     <div className="row g-4">
-                        {servicesData.map((service, index) => (
-                            <div key={index} className="col-lg-4 col-md-6">
+                        {homeData.services && homeData.services.map((service, index) => (
+                            <div key={service.id || index} className="col-lg-4 col-md-6">
                                 <div className="service-card">
                                     <h3 className="service-title">{service.title}</h3>
                                     <div className="service-icon-wrapper">
                                         <img src={service.icon} alt={service.title} className="service-icon" />
                                     </div>
-                                    <p className="service-desc">{service.desc}</p>
+                                    <p className="service-desc">{service.description}</p>
+
                                 </div>
                             </div>
                         ))}
@@ -314,7 +271,7 @@ const Home = () => {
             </section>
 
             {/* === Work Component (Kept Separate) === */}
-            <Work />
+            <Work workShowcase={homeData.work_showcase} />
 
             {/* === Clients Section === */}
             <section className="clients-section">
@@ -349,10 +306,10 @@ const Home = () => {
                                 }
                             }}
                         >
-                            {clientLogos.map((logo, index) => (
-                                <SwiperSlide key={index}>
+                            {clientLogos.map((client, index) => (
+                                <SwiperSlide key={client.id || index}>
                                     <div className="client-slide">
-                                        <img src={logo} alt={`Client ${index + 1}`} className="client-logo" />
+                                        <img src={client.logo} alt={`Client ${index + 1}`} className="client-logo" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -400,17 +357,19 @@ const Home = () => {
                                 }
                             }}
                         >
-                            {testimonialsData.map((item, index) => (
-                                <SwiperSlide key={index}>
+                            {homeData.testimonials && homeData.testimonials.map((item, index) => (
+                                <SwiperSlide key={item.id || index}>
                                     <div className="testimonial-card">
                                         <div className="quote-icon">“</div>
                                         <div className="stars">
-                                            {[...Array(item.stars)].map((_, i) => (
+                                            {/* Stars mapping if rating exists, otherwise just show images or nothing */}
+                                            {[...Array(5)].map((_, i) => (
                                                 <span key={i}>★</span>
                                             ))}
                                         </div>
-                                        <h3 className="testimonial-title">{item.title}</h3>
-                                        <p className="testimonial-desc">{item.text}</p>
+                                        <h3 className="testimonial-title">{item.name || item.client_name}</h3>
+                                        <p className="testimonial-subtitle text-muted mb-2">{item.position || item.client_position}</p>
+                                        <p className="testimonial-desc">{item.content || item.testimonial_text}</p>
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -419,7 +378,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* === Results Section === */}
+            {/* === Results Section (Video Testimonials) === */}
             <section className="results-section">
                 <div className="container">
                     <div className="row align-items-center mb-5">
@@ -436,26 +395,37 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="row g-3">
-                        <div className="col-6 col-md-3">
-                            <div className="result-img-wrapper">
-                                <img src={result1} alt="Real Result 1" className="img-fluid result-img" />
-                            </div>
-                        </div>
-                        <div className="col-6 col-md-3">
-                            <div className="result-img-wrapper">
-                                <img src={result2} alt="Real Result 2" className="img-fluid result-img" />
-                            </div>
-                        </div>
-                        <div className="col-6 col-md-3">
-                            <div className="result-img-wrapper">
-                                <img src={result3} alt="Real Result 3" className="img-fluid result-img" />
-                            </div>
-                        </div>
-                        <div className="col-6 col-md-3">
-                            <div className="result-img-wrapper">
-                                <img src={result4} alt="Real Result 4" className="img-fluid result-img" />
-                            </div>
-                        </div>
+                        {homeData.video_testimonials && homeData.video_testimonials.map((video, index) => {
+                            const isPlaying = playingVideoId === (video.id || index);
+                            return (
+                                <div key={video.id || index} className="col-6 col-md-3">
+                                    <div
+                                        className="result-img-wrapper position-relative"
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        {isPlaying ? (
+                                            <iframe
+                                                width="100%"
+                                                height="100%"
+                                                src={`${video.video_url}${video.video_url.includes('?') ? '&' : '?'}autoplay=1`}
+                                                title={video.title}
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                                style={{ position: 'absolute', top: 0, left: 0 }}
+                                            ></iframe>
+                                        ) : (
+                                            <div onClick={() => setPlayingVideoId(video.id || index)}>
+                                                <img src={video.thumbnail} alt={video.title} className="img-fluid result-img" />
+                                                <div className="play-icon-overlay">
+                                                    ▶
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -465,30 +435,37 @@ const Home = () => {
                 <div className="container">
                     <div className="row align-items-start">
                         <div className="col-lg-5 mb-5 mb-lg-0 position-relative z-2">
-                            <h2 className="growth-headline">
-                                Your Digital <br />
-                                Growth Partner.
-                            </h2>
-                            <button className="btn-about">ABOUT THE BRAND</button>
+                            <h2 className="growth-headline" dangerouslySetInnerHTML={{ __html: homeData.company_highlight?.section_title }} />
+                            <Link to={homeData.company_highlight?.button_link || '/about'}>
+                                <button className="btn-about">{homeData.company_highlight?.button_text || 'ABOUT THE BRAND'}</button>
+                            </Link>
                         </div>
                         <div className="col-lg-7 position-relative">
                             <img src={netLikes} alt="Likes" className="net-sticker" />
                             <div className="growth-image-wrapper">
-                                <img src={teamMeeting} alt="Team Meeting" className="img-fluid growth-img" />
+                                <img src={homeData.company_highlight?.team_image || teamMeeting} alt="Team Meeting" className="img-fluid growth-img" />
                             </div>
                             <div className="growth-content mt-4">
-                                <p className="growth-desc">
-                                    We’re a team of developers, designers, and marketers helping 200+ businesses worldwide. With 300+ projects delivered, our mission is simple: turn your digital vision into a reality.
-                                </p>
+                                <p className="growth-desc" dangerouslySetInnerHTML={{ __html: homeData.company_highlight?.section_description }} />
+                                {/* Display Statistics from company highlight if available and not already in description */}
+                                {homeData.company_highlight?.statistics && (
+                                    <div className="d-flex gap-4 mt-3">
+                                        {homeData.company_highlight.statistics.map((stat, idx) => (
+                                            <div key={idx}>
+                                                <strong className="d-block h4 mb-0">{stat.value}</strong>
+                                                <span className="text-muted small">{stat.label}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                            {/* <img src={baburaoSticker} alt="Baburao Style" className="baburao-sticker" /> */}
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* === Contact Component (Kept Separate) === */}
-            <Contact />
+            <Contact helpData={homeData.help_section} />
         </main>
     );
 };

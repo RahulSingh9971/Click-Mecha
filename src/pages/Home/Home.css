@@ -796,3 +796,36 @@
     box-shadow: 0px 0px 0px #0E1D28;
     transform: translateY(4px);
 }
+
+/* Result Video Overlay */
+.play-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    /* Let clicks pass through to the anchor */
+}
+
+.result-img-wrapper:hover .play-icon-overlay {
+    opacity: 1;
+    background: rgba(247, 150, 45, 0.9);
+    /* Brand color highlight */
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.result-img-wrapper {
+    position: relative;
+    /* Ensure overlay is positioned relative to this */
+}

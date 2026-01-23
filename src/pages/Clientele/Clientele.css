@@ -51,11 +51,12 @@
 
 .client-logo-img {
     max-width: 100%;
-    max-height: 80px;
+    max-height: 100%;
+
     object-fit: contain;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     /* Optional: Make them grayscale if you want uniform look initially */
-    opacity: 0.8;
+    /* opacity: 0.8; */
     transition: all 0.3s ease;
 }
 

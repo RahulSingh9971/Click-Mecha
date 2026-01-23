@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import { FaTiktok, FaInstagram, FaXTwitter, FaYoutube } from 'react-icons/fa6';
+import { FaLinkedin, FaFacebook, FaInstagram, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import logo from '../../assets/clickmecha-logo.png'; // Updated logo
 
 const Footer = () => {
@@ -10,21 +10,22 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     {/* Branding Column */}
-                    <div className="col-lg-5 col-md-12 mb-4">
+                    <div className="col-lg-3 col-md-12 mb-4">
                         <div className="footer-logo mb-3">
                             {/* Using text for now as per design mockup appearance effectively, or the image with filter if needed */}
                             <div className="logo-container">
-                                <img src={logo} alt="Clickmecha" className="footer-logo-img" />
+                                <Link to="/">
+                                    <img src={logo} alt="Clickmecha" className="footer-logo-img" />
+                                </Link>
                             </div>
                         </div>
                         <p className="footer-description">
                             We design, build, and market digital solutions that help businesses grow faster.
                         </p>
                         <div className="social-icons d-flex gap-3 mb-4">
-                            <a href="#" className="social-icon"><FaTiktok /></a>
-                            <a href="#" className="social-icon"><FaInstagram /></a>
-                            <a href="#" className="social-icon"><FaXTwitter /></a>
-                            <a href="#" className="social-icon"><FaYoutube /></a>
+                            <a href="https://www.linkedin.com/company/clickmecha" target="_blank" rel="noopener noreferrer" className="social-icon"><FaLinkedin /></a>
+                            <a href="https://www.facebook.com/theclickmechaa" target="_blank" rel="noopener noreferrer" className="social-icon"><FaFacebook /></a>
+                            <a href="https://www.instagram.com/theclickmechaa" target="_blank" rel="noopener noreferrer" className="social-icon"><FaInstagram /></a>
                         </div>
                         <div className="copyright text-muted">
                             <small>
@@ -32,10 +33,24 @@ const Footer = () => {
                                 All rights reserved
                             </small>
                         </div>
+                        <div className="newsletter-section mt-4">
+                            <h6 className="text-white mb-2">Subscribe to our newsletter</h6>
+                            <form className="d-flex gap-2">
+                                <input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    className="newsletter-input"
+                                    required
+                                />
+                                <button type="submit" className="newsletter-btn">
+                                    →
+                                </button>
+                            </form>
+                        </div>
                     </div>
 
                     {/* Navigation Links */}
-                    <div className="col-lg-3 col-md-6 mb-4">
+                    <div className="col-lg-2 col-md-6 mb-4">
                         <ul className="list-unstyled footer-links">
                             <li><Link to="/">HOME</Link></li>
                             <li><Link to="/about">ABOUT</Link></li>
@@ -47,13 +62,47 @@ const Footer = () => {
                         </ul>
                     </div>
 
+
+
                     {/* Legal Links */}
                     <div className="col-lg-4 col-md-6 mb-4">
                         <ul className="list-unstyled footer-links">
                             <li><a href="#privacy">PRIVACY POLICY</a></li>
                             <li><a href="#terms">TERMS OF SERVICE</a></li>
                             <li><a href="#cookies">COOKIES POLICIES</a></li>
+                            <li><Link to="/posh-policy">PoSH POLICY</Link></li>
                         </ul>
+
+                        <div className="footer-contact mt-4">
+                            <div className="d-flex align-items-start gap-2 mb-2 text-white-50">
+                                <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
+                                <span>Best Sky Tower, 810, Netaji Subhash Place, Shakurpur, New Delhi, Delhi, 110034</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2 mb-2 text-white-50">
+                                <FaPhoneAlt />
+                                <span>+91 99990 08998</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2 text-white-50">
+                                <FaEnvelope />
+                                <span>kavya@clickmecha.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Google Map Column */}
+                    <div className="col-lg-3 col-md-6 mb-4">
+                        <div className="footer-map-container" style={{ borderRadius: '15px', overflow: 'hidden', height: '200px' }}>
+                            <iframe
+                                title="Footer Location Map"
+                                src="https://maps.google.com/maps?q=Best%20Sky%20Tower%2C%20810%2C%20Netaji%20Subhash%20Place%2C%20Shakurpur%2C%20New%20Delhi%2C%20Delhi%20110034&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
             </div>

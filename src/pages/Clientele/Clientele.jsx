@@ -59,7 +59,7 @@ const Clientele = () => {
                     </div>
                 )}
             </div>
-            <Contact />
+            <Contact preHeading="A Unit Of Alakh Advertising And Publicity Pvt Ltd" />
         </div>
     );
 };

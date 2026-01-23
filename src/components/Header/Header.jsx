@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/clickmecha-logo.png';
+import { FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,9 @@ const Header = () => {
         <header className="header">
             <div className="container d-flex justify-content-between align-items-center">
                 <div className="header-logo">
-                    <img src={logo} alt="Clickmecha Logo" className="logo-image" />
+                    <Link to="/">
+                        <img src={logo} alt="Clickmecha Logo" className="logo-image" />
+                    </Link>
                 </div>
 
                 <div className="mobile-menu-icon" onClick={toggleMenu}>
@@ -33,12 +36,24 @@ const Header = () => {
                     <Link to="/blog" onClick={toggleMenu}>BLOG</Link>
                     <Link to="/contact" onClick={toggleMenu}>CONTACT</Link>
                     <div className="mobile-cta">
-                        <button className="btn-book" onClick={toggleMenu}>BOOK A FREE CALL</button>
+                        <div className="contact-icons-wrapper">
+                            <a href="tel:+919999008998" className="contact-icon-link">
+                                <FaPhoneAlt />
+                            </a>
+                            <a href="mailto:kavya@clickmecha.com" className="contact-icon-link">
+                                <FaEnvelope />
+                            </a>
+                        </div>
+                        <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
+                            <button className="btn-book">BOOK A FREE CALL</button>
+                        </a>
                     </div>
                 </nav>
 
                 <div className="header-cta desktop-cta">
-                    <button className="btn-book">BOOK A FREE CALL</button>
+                    <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
+                        <button className="btn-book">BOOK A FREE CALL</button>
+                    </a>
                 </div>
             </div>
         </header>

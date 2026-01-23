@@ -12,6 +12,10 @@
     margin-bottom: 60px;
 }
 
+.blog-page .contact-section {
+    margin-top: 0px;
+}
+
 .blog-tabs {
     background-color: #FFF8E7;
     /* Light cream background for tabs container */

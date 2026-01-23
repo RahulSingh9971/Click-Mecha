@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Service.css';
 import serviceBg from '../../assets/service-images/service-bg.png';
 import avatars from '../../assets/service-images/avatars.png';
@@ -19,13 +20,12 @@ import Work from '../../components/Work/Work';
 import Contact from '../../components/Contact/Contact';
 
 // Client Logos
-import clientTinder from '../../assets/service-images/logo-tinder.png';
-import clientEa from '../../assets/service-images/logo-ea.png';
-import clientSlack from '../../assets/service-images/logo-slack.png';
-import clientAmazon from '../../assets/service-images/logo-amazon.png';
-import clientWalmart from '../../assets/service-images/logo-walmart.png';
-import clientGoogle from '../../assets/service-images/logo-google.png';
-import clientLinkedin from '../../assets/service-images/logo-linkedin.png';
+import logo1 from '../../assets/home-images/imgi_10_nww_c9.png';
+import logo2 from '../../assets/home-images/imgi_35_cl5.png';
+import logo3 from '../../assets/home-images/imgi_36_cl6.png';
+import logo4 from '../../assets/home-images/imgi_49_cl20.png';
+import logo5 from '../../assets/home-images/imgi_50_cl23.png';
+import logo6 from '../../assets/home-images/imgi_51_cl24.png';
 
 // Testimonials Asset
 import rocketIcon from '../../assets/home-images/rocket.png';
@@ -37,6 +37,8 @@ const Service = () => {
         { icon: shopifyIcon, text: "OFFICIAL SHOPIFY PARTNER" },
         { icon: clientsIcon, text: "450+ CLIENTS GLOBALLY" }
     ];
+
+    const clientLogos = [logo1, logo2, logo3, logo4, logo5, logo6];
 
     const offerings = [
         {
@@ -152,7 +154,9 @@ const Service = () => {
                             </h1>
 
                             <div className="hero-cta-wrapper">
-                                <button className="btn-book-hero">BOOK A FREE CALL</button>
+                                <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
+                                    <button className="btn-book-hero">BOOK A FREE CALL</button>
+                                </a>
                             </div>
                         </div>
 
@@ -164,7 +168,7 @@ const Service = () => {
                                 {/* Floating Badge */}
                                 <div className="stat-badge">
                                     <div className="stat-percent">55%</div>
-                                    <div className="stat-desc">Increase in<br />Conversion Rate</div>
+                                    <div className="stat-desc-service">Increase in<br />Conversion Rate</div>
                                 </div>
                             </div>
                         </div>
@@ -306,108 +310,48 @@ const Service = () => {
             <Work />
 
             {/* Pricing Section */}
-            <section className="pricing-section">
-                <div className="container">
-                    <h2 className="pricing-title text-center">Our plans to get started</h2>
 
-                    <div className="row g-4 justify-content-center align-items-center">
-                        {plans.map((plan) => (
-                            <div key={plan.id} className="col-lg-4 col-md-6">
-                                <div className={`pricing-card ${plan.highlight ? 'highlight-card' : ''}`}>
 
-                                    <div className="discount-badge">{plan.discount}</div>
-
-                                    <div className="price-header">
-                                        <h3 className="price">{plan.price}</h3>
-                                        <span className="original-price">{plan.originalPrice}</span>
-                                    </div>
-
-                                    <p className="plan-description">{plan.description}</p>
-
-                                    <ul className="feature-list">
-                                        {plan.features.map((feature, idx) => (
-                                            <li key={idx}>
-                                                {/* Inline SVGs for check icons */}
-                                                {plan.highlight ? (
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="check-icon">
-                                                        <circle cx="12" cy="12" r="10" fill="#0E1D28" />
-                                                        <path d="M7.5 12L10.5 15L16.5 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-                                                ) : (
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="check-icon">
-                                                        <circle cx="12" cy="12" r="10" fill="#F7941E" />
-                                                        <path d="M7.5 12L10.5 15L16.5 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                    </svg>
-                                                )}
-                                                <span>{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <button className="btn-book-pricing">BOOK A FREE CALL</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Our Clients Section */}
-            <section className="clients-section">
-                <div className="container-fluid">
-                    <h2 className="clients-title text-center">Our Clients</h2>
-                    <div className="clients-slider-wrapper">
+            {/* === Clients Section === */}
+            <section className="service-page-clients-section">
+                <div className="container-fluid text-center">
+                    <h2 className="service-page-clients-headline mb-5">Our Clients</h2>
+                    <div className="slider-container">
                         <Swiper
                             modules={[Autoplay]}
-                            spaceBetween={30}
-                            slidesPerView={6}
+                            spaceBetween={20}
+                            slidesPerView={5}
                             loop={true}
                             autoplay={{
-                                delay: 3000,
+                                delay: 2000,
                                 disableOnInteraction: false,
                             }}
+                            speed={500}
                             breakpoints={{
-                                0: { slidesPerView: 2 },
-                                480: { slidesPerView: 3 },
-                                768: { slidesPerView: 4 },
-                                1024: { slidesPerView: 6 }
+                                0: {
+                                    slidesPerView: 2,
+                                },
+                                480: {
+                                    slidesPerView: 2,
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                },
+                                1024: {
+                                    slidesPerView: 4,
+                                },
+                                1280: {
+                                    slidesPerView: 5,
+                                }
                             }}
                         >
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientTinder} alt="Tinder" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientEa} alt="EA" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientSlack} alt="Slack" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientAmazon} alt="Amazon" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientGoogle} alt="Google" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientWalmart} alt="Walmart" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="client-logo-wrapper">
-                                    <img src={clientLinkedin} alt="LinkedIn" className="service-client-logo" />
-                                </div>
-                            </SwiperSlide>
+                            {clientLogos.map((logo, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className="service-page-client-slide">
+                                        <img src={logo} alt={`Client ${index + 1}`} className="service-page-client-logo" />
+                                    </div>
+                                </SwiperSlide>
+                            ))}
                         </Swiper>
                     </div>
                 </div>

@@ -79,7 +79,9 @@ const Pricing = () => {
                                     ))}
                                 </ul>
 
-                                <button className="btn-book-pricing">BOOK A FREE CALL</button>
+                                <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
+                                    <button className="btn-book-pricing">BOOK A FREE CALL</button>
+                                </a>
                             </div>
                         </div>
                     ))}
