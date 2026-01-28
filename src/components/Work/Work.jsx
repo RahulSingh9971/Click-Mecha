@@ -60,18 +60,35 @@ const Work = ({ workShowcase }) => {
                         <div className="row g-4">
                             {projects.map((project, index) => (
                                 <div key={project.id || index} className="col-md-6 mb-4">
-                                    <div className="project-card">
-                                        <div className="project-image-wrapper">
-                                            <span className="project-tag">{project.category || 'DEVELOPMENT'}</span>
-                                            <img src={project.image} alt={project.title} className="project-image" />
+                                    {project.link ? (
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-decoration-none d-block h-100">
+                                            <div className="project-card">
+                                                <div className="project-image-wrapper">
+                                                    <span className="project-tag">{project.category || 'DEVELOPMENT'}</span>
+                                                    <img src={project.image} alt={project.title} className="project-image" />
+                                                </div>
+                                                <div className="project-info mt-4">
+                                                    <h3 className="project-title">{project.title}</h3>
+                                                    <p className="project-desc">
+                                                        {project.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ) : (
+                                        <div className="project-card">
+                                            <div className="project-image-wrapper">
+                                                <span className="project-tag">{project.category || 'DEVELOPMENT'}</span>
+                                                <img src={project.image} alt={project.title} className="project-image" />
+                                            </div>
+                                            <div className="project-info mt-4">
+                                                <h3 className="project-title">{project.title}</h3>
+                                                <p className="project-desc">
+                                                    {project.description}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div className="project-info mt-4">
-                                            <h3 className="project-title">{project.title}</h3>
-                                            <p className="project-desc">
-                                                {project.description}
-                                            </p>
-                                        </div>
-                                    </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

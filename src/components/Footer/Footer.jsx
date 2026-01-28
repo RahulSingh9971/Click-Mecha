@@ -65,15 +65,18 @@ const Footer = () => {
 
 
                     {/* Legal Links */}
-                    <div className="col-lg-4 col-md-6 mb-4">
+                    <div className="col-lg-3 col-md-6 mb-4">
                         <ul className="list-unstyled footer-links">
                             <li><a href="#privacy">PRIVACY POLICY</a></li>
                             <li><a href="#terms">TERMS OF SERVICE</a></li>
                             <li><a href="#cookies">COOKIES POLICIES</a></li>
                             <li><Link to="/posh-policy">PoSH POLICY</Link></li>
                         </ul>
+                    </div>
 
-                        <div className="footer-contact mt-4">
+                    {/* Contact & Google Map Column */}
+                    <div className="col-lg-4 col-md-6 mb-4">
+                        <div className="footer-contact mb-4">
                             <div className="d-flex align-items-start gap-2 mb-2 text-white-50">
                                 <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
                                 <span>Best Sky Tower, 810, Netaji Subhash Place, Shakurpur, New Delhi, Delhi, 110034</span>
@@ -87,10 +90,7 @@ const Footer = () => {
                                 <span>kavya@clickmecha.com</span>
                             </div>
                         </div>
-                    </div>
 
-                    {/* Google Map Column */}
-                    <div className="col-lg-3 col-md-6 mb-4">
                         <div className="footer-map-container" style={{ borderRadius: '15px', overflow: 'hidden', height: '200px' }}>
                             <iframe
                                 title="Footer Location Map"
