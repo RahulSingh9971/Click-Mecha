@@ -1,0 +1,550 @@
+.sd-page-wrapper {
+    background-color: #ffffff;
+    /* Keeping base background consistent or white if preferred, using cream for now */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    min-height: 100vh;
+}
+
+.sd-hero-section {
+    padding: 2rem 0;
+}
+
+.sd-card-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 40px;
+    padding: 4rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.sd-content-col {
+    padding-right: 3rem;
+}
+
+.sd-hero-title {
+    font-family: 'Larken', serif;
+    font-size: 2.8rem;
+    color: #0E1D28;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.sd-hero-desc {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.sd-features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2.5rem;
+}
+
+.sd-features-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: #222;
+}
+
+.sd-check-icon {
+    color: #0E1D28;
+    margin-right: 12px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.sd-book-btn {
+    background-color: #F7941E;
+    color: #0E1D28;
+    border: 2px solid #0E1D28;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0px #0E1D28;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sd-book-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #0E1D28;
+}
+
+.sd-form-col {
+    display: flex;
+    justify-content: center;
+}
+
+.sd-form-box {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 30px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.sd-form-heading {
+    font-family: 'Larken', serif;
+    font-size: 2.2rem;
+    color: #0E1D28;
+    margin-bottom: 2rem;
+}
+
+.sd-input-field {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: #ffffff;
+    /* Reverted to white */
+    border: 1px solid #ccc;
+    /* Add border back */
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #333333;
+    /* Dark text */
+    outline: none;
+    transition: all 0.2s;
+}
+
+.sd-input-field::placeholder {
+    color: #888888;
+}
+
+.sd-input-field:focus {
+    border-color: #0E1D28;
+    box-shadow: 0 0 0 2px rgba(14, 29, 40, 0.1);
+}
+
+.sd-checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.sd-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    background-color: #ffffff;
+    /* Ensure white background */
+    border: 1px solid #0E1D28;
+    /* Dark border */
+    border-radius: 4px;
+    display: grid;
+    place-content: center;
+}
+
+.sd-checkbox::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #F7941E;
+    /* Orange checkmark/fill */
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.sd-checkbox:checked::before {
+    transform: scale(1);
+}
+
+.sd-checkbox-label {
+    font-size: 0.95rem;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sd-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #ffffff;
+    color: #0E1D28;
+    border: 2px solid #0E1D28;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    /* 3D Button Effect */
+    box-shadow: 0px 4px 0px #0E1D28;
+    transition: all 0.1s ease;
+}
+
+.sd-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 0px #0E1D28;
+}
+
+.sd-submit-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0px 0px 0px #0E1D28;
+}
+
+@media (max-width: 991px) {
+    .sd-card-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .sd-content-col {
+        padding-right: 15px;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .sd-features-list li {
+        justify-content: center;
+        text-align: left;
+    }
+
+    .sd-hero-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* Clients Section */
+.sd-clients-section {
+    background-color: #ffffff;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.sd-clients-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.sd-clients-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.sd-client-logo-wrapper {
+    /* Set a max width/height to constrain logos nicely */
+    max-width: 200px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Removed grayscale/hover effects */
+    transition: all 0.3s ease;
+}
+
+.sd-client-logo-wrapper:hover {
+    transform: scale(1.05);
+    /* Slight zoom instead */
+}
+
+.sd-client-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .sd-clients-grid {
+        justify-content: center;
+    }
+}
+
+/* Strategies Section */
+.sd-strategies-section {
+    background-color: #fffaf0;
+    /* Cream background matching image */
+    padding: 5rem 0;
+}
+
+.sd-strategies-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.sd-strategies-title {
+    font-family: 'Larken', serif;
+    font-size: 2.5rem;
+    color: #F7941E;
+    /* Orange title */
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.sd-strategies-subtitle {
+    font-family: 'Larken', serif;
+    font-size: 2rem;
+    color: #0E1D28;
+    font-weight: 500;
+}
+
+.sd-strategy-card {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 2.5rem;
+    height: 100%;
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sd-strategy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.sd-card-title {
+    color: #F7941E;
+    /* Orange */
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-family: 'Larken', serif;
+}
+
+.sd-card-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.sd-card-list li {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 15px;
+    line-height: 1.5;
+}
+
+.sd-card-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0E1D28;
+    font-weight: bold;
+}
+
+.sd-card-btn {
+    background-color: #F7941E;
+    color: #0E1D28;
+    border: 2px solid #0E1D28;
+    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0px #0E1D28;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.sd-card-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #0E1D28;
+}
+
+.sd-card-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #0E1D28;
+}
+
+@media (max-width: 991px) {
+    .sd-strategies-title {
+        font-size: 2rem;
+    }
+
+    .sd-strategies-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+/* Case Studies Section */
+.sd-case-studies-section {
+    background-color: #ffffff;
+    padding: 5rem 0;
+}
+
+.sd-case-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sd-case-label {
+    font-family: 'Larken', serif;
+    font-size: 2rem;
+    color: #F7941E;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.sd-case-title {
+    font-family: 'Larken', serif;
+    font-size: 2.5rem;
+    color: #F7941E;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.sd-case-desc {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.sd-case-card {
+    background-color: #f1f1f1;
+    /* Light grey background from screenshot */
+    border-radius: 30px;
+    padding: 2.5rem;
+    height: 100%;
+}
+
+.sd-client-name {
+    font-family: 'Larken', serif;
+    color: #F7941E;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.sd-client-name span {
+    color: #F7941E;
+    /* Or keep consistent orange */
+}
+
+/* Table container styling */
+.sd-results-table {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.sd-table-header {
+    display: flex;
+    background-color: #F99D2F;
+    /* Orange header */
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.8rem 1rem;
+}
+
+.sd-th-keyword {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.sd-th-rank {
+    width: 80px;
+    text-align: center;
+    font-size: 0.95rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    padding-left: 10px;
+}
+
+.sd-table-body {
+    border: 1px solid #eee;
+    border-top: none;
+}
+
+.sd-table-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 0.8rem 1rem;
+    background-color: #ffffff;
+}
+
+.sd-table-row:last-child {
+    border-bottom: none;
+}
+
+.sd-td-keyword {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.sd-td-rank {
+    width: 80px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 600;
+    border-left: 1px solid #eee;
+    padding-left: 10px;
+}
+
+@media (max-width: 991px) {
+    .sd-case-card {
+        padding: 1.5rem;
+    }
+
+    .sd-client-name {
+        font-size: 1.5rem;
+    }
+}
+
+/* Performance Section */
+.sd-performance-section {
+    background-color: #ffffff;
+    padding: 5rem 0;
+}
+
+.sd-performance-title {
+    font-family: 'Larken', serif;
+    font-size: 2.8rem;
+    color: #F7941E;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.sd-performance-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.sd-performance-card:hover {
+    transform: translateY(-5px);
+}
+
+.sd-performance-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 991px) {
+    .sd-performance-title {
+        font-size: 2.2rem;
+    }
+}

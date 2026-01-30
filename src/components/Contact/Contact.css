@@ -136,3 +136,79 @@
         justify-content: unset;
     }
 }
+
+/* Modal Popup Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content-box {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-out;
+    max-height: 90vh;
+    /* Allow some space */
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f0f0f0;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s;
+    width: unset;
+    height: unset;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0;
+}
+
+.close-modal-btn svg {
+    stroke-width: 3;
+    /* Make it bolder */
+    width: 24px;
+    height: 24px;
+}
+
+.close-modal-btn:hover {
+    transform: rotate(90deg);
+    background: #e0e0e0;
+    color: #000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

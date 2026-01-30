@@ -1,879 +1,222 @@
-.service-page {
-    /* Ensure full width and appropriate spacing if needed */
-    width: 100%;
-    overflow-x: hidden;
-}
-
-.service-hero {
-    position: relative;
-    width: 100%;
-    min-height: 80vh;
-    /* Adjust as needed */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 0;
-    /* Fallback color if image fails or for behind opacity */
+.service-page-container {
     background-color: #fffaf0;
+    /* Cream background like the image */
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    min-height: 100vh;
 }
 
-
-
-.service-hero-content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    margin: 0 auto;
-    padding: 3rem;
-    padding-bottom: 0;
-    /* Added internal padding */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 50px;
-    /* To match the rounded card look */
-}
-
-/* Flex layout handled by Bootstrap classes in JSX (row, col-lg-6), 
-   but adding custom flex behavior for smaller screens just in case */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.col-lg-6 {
-    flex: 0 0 auto;
-    width: 100%;
-}
-
-@media (min-width: 992px) {
-    .col-lg-6 {
-        width: 50%;
-    }
-}
-
-/* Left Side Styling */
-.rating-pill {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    /* backdrop-filter: blur(5px); */
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    /* border: 1px solid rgba(255, 255, 255, 0.6); */
-}
-
-.rating-avatars {
-    height: 32px;
-    width: auto;
-    margin-right: 0.75rem;
-}
-
-.rating-text {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #333;
-    text-align: left;
-}
-
-.hero-heading {
-    font-family: 'Larken', system-ui, serif;
-    /* Using custom font if available */
-    font-size: 3rem;
-    line-height: 1.2;
-    color: #1a1a1a;
-    margin-bottom: 2rem;
-    font-weight: 500;
-}
-
-.btn-book-hero {
-    background-color: #f7941e;
-    /* Orange from design */
-    color: #1a1a1a;
-    border: 2px solid #1a1a1a;
-    border-radius: 50px;
-    padding: 1rem 2.5rem;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    /* 3D Effect: Hard solid shadow to the bottom-left */
-    box-shadow: -5px 6px 0px 0px #1a1a1a;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-book-hero:hover {
-    /* "Press" effect: move button towards shadow */
-    transform: translate(-2px, 2px);
-    box-shadow: -3px 4px 0px 0px #1a1a1a;
-}
-
-.btn-book-hero:active {
-    /* Fully pressed */
-    transform: translate(-5px, 6px);
-    box-shadow: 0px 0px 0px 0px #1a1a1a;
-}
-
-/* Right Side Styling */
-.service-image-content {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.image-wrapper {
-    position: relative;
-    display: inline-block;
-}
-
-.phones-mockup {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    /* Ensure it doesn't overflow drastically */
-    max-height: 600px;
-}
-
-.clients-section-service {
-    padding-top: 45px !important;
-    padding-bottom: 45px !important;
-}
-
-.stat-badge {
-    position: absolute;
-    bottom: 20%;
-    left: -20px;
-    /* Adjust to float it correctly */
-    width: 140px;
-    height: 140px;
-    background-color: #000;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-
-.stat-percent {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.stat-desc-service {
-    color: #ccc;
-    font-size: 12px;
-    line-height: 1.2;
-    margin-top: 5px;
-    opacity: 0.9;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 991px) {
-    .service-hero {
-        text-align: center;
-        padding-top: 31px;
-        /* Space for fixed header if needed */
-        padding-bottom: 45px;
-        /* Adjusting bottom padding explicitly for hero if wanted, or see generic rule below */
-    }
-
-    /* Unified Mobile Padding Rule */
-    .service-hero,
-    .trust-stats-section,
-    .offerings-section,
-    .pain-points-section,
-    .pricing-section,
-    .clients-section-service,
-    .service-testimonials-section {
-        padding-top: 45px !important;
-        padding-bottom: 45px !important;
-    }
-
-
-
-    .container.service-hero-content {
-        padding: 20px 15px;
-        margin: 0px 10px;
-        border-radius: 32px;
-        padding-bottom: 0px;
-    }
-
-    .rating-pill {
-        margin: 0 auto 1.5rem;
-    }
-
-    .service-image-content {
-        margin-top: 3rem;
-    }
-
-    .hero-heading {
-        font-size: 2.2rem;
-    }
-
-    .offerings-section {
-        /* Remove duplicate specific rule now covered by unified rule above, or keep width override */
-        width: 100%;
-    }
-}
-
-/* Trust Stats Section */
-.trust-stats-section {
-    padding: 2rem 0;
-    width: 100%;
-    margin-top: 1rem;
-    overflow: hidden;
-    /* Prevent horizontal scroll for slider */
-    background-color: transparent;
-}
-
-.desktop-stats-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.stat-item {
-    display: flex !important;
-    /* Force flex for slider elements */
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.stat-icon {
-    width: auto;
-    height: 40px;
-    /* Adjust based on icon aspect ratio */
-    object-fit: contain;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Slider Overrides if needed */
-.mobile-stats-slider .slick-slide {
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-
-/* Offerings Section */
-.offerings-section {
-    padding: 5rem 0;
-    width: 100%;
-}
-
-.offerings-header {
+.service-header {
     margin-bottom: 4rem;
 }
 
-.section-intro-text {
-    color: #666;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.section-badge {
-    display: inline-block;
-    background-color: #f7941e;
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.5px;
-}
-
-.section-title {
-    font-family: 'Larken', system-ui, serif;
-    font-size: 3.5rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    line-height: 1.15;
-}
-
-.text-orange {
-    color: #f7941e;
-}
-
-/* Offering Cards */
-.offerings-grid {
-    margin-top: 2rem;
-}
-
-.offering-card {
-    text-align: left;
-    padding: 1rem;
-}
-
-.offering-icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 1.5rem;
-    border: 1px solid #f7941e;
-}
-
-.offering-icon {
-    width: 50%;
-    height: auto;
-}
-
-.offering-title {
-    font-family: system-ui, sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #1a1a1a;
-}
-
-.offering-desc {
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-@media (max-width: 991px) {
-    .section-title {
-        font-size: 2.5rem;
-    }
-
-    .offerings-header {
-        margin-bottom: 3rem;
-    }
-
-    .offering-card {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .offering-icon-wrapper {
-        margin: 0 auto 1.5rem;
-    }
-}
-
-/* Pain Points Section */
-.pain-points-section {
-    padding: 6rem 0 12rem 0;
-    width: 100%;
-    background-color: #fffbf2;
-    /* Creamy background */
-}
-
-.pain-points-header {
-    margin-bottom: 4rem;
-}
-
-.pain-points-title {
-    font-family: 'Larken', system-ui, serif;
-    font-size: 3rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-}
-
-.pain-points-subtitle {
-    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
-    font-size: 2.5rem;
-    /* Larger script text */
-    color: #f7941e;
-    font-weight: 400;
-    margin-top: 0;
-}
-
-.pain-point-card {
-    text-align: center;
-    padding: 0 1.5rem;
-}
-
-.pain-point-icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    background-color: #fff5cc;
-    /* Light yellow background */
-    border: 1px solid #ffe680;
-    border-radius: 20px;
-    /* Rounded square */
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 10px rgba(247, 148, 30, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.pain-point-card:hover .pain-point-icon-wrapper {
-    transform: translateY(-5px);
-}
-
-.pain-point-icon {
-    width: 40px;
-    height: auto;
-}
-
-.pain-point-title {
-    font-family: system-ui, sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 1rem;
-}
-
-.pain-point-desc {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.6;
-    max-width: 320px;
-    margin: 0 auto;
-}
-
-@media (max-width: 991px) {
-    .pain-points-title {
-        font-size: 2.2rem;
-    }
-
-    .pain-points-subtitle {
-        font-size: 2rem;
-    }
-
-    .pain-points-grid .col-lg-4 {
-        margin-bottom: 3rem;
-    }
-}
-
-.pricing-section {
-    padding: 6rem 0;
-    background-color: #fffbf2;
-    /* Matching the creamy background */
-    font-family: 'Inter', sans-serif;
-}
-
-.pricing-title {
+.service-main-title {
     font-family: 'Larken', serif;
-    font-size: 3rem;
+    /* Assuming Larken is available, else uses serif */
+    font-size: 3.5rem;
+    font-weight: 500;
     color: #0E1D28;
-    margin-bottom: 4rem;
-}
-
-.pricing-title::after {
-    content: "started";
-    display: block;
-}
-
-.pricing-title {
-    /* Adjusting title to match the line break if needed, 
-       but centering is fine for now. 
-       The image has "Our plans to get \n started" center aligned 
-    */
-    line-height: 1.2;
 }
 
 /* Card Styles */
-.pricing-card {
-    background: white;
-    border-radius: 32px;
-    padding: 2.5rem 2rem;
+.new-service-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 3rem 2rem;
     text-align: center;
-    position: relative;
-    transition: transform 0.3s ease;
     height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    /* Clean shadow for depth if needed, image shows very subtle or flat-ish cards on cream bg */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
 }
 
-.pricing-card:hover {
-    transform: translateY(-10px);
+.new-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
-.highlight-card {
-    background-color: #F7941E;
-    /* Orange */
-    color: white;
-    transform: scale(1.05);
-    z-index: 2;
-    box-shadow: 0 20px 40px rgba(247, 148, 30, 0.2);
-}
-
-.highlight-card:hover {
-    transform: scale(1.08);
-}
-
-/* Badge */
-.discount-badge {
-    display: inline-block;
-    background-color: #F7941E;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 16px;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-}
-
-.highlight-card .discount-badge {
-    background-color: white;
-    color: #F7941E;
-}
-
-/* Price */
-.price-header {
-    margin-bottom: 1.5rem;
-}
-
-.price {
+.new-service-title {
     font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #0E1D28;
+    margin-bottom: 0.75rem;
+    /* Ensure title doesn't break weirdly, maybe min-height if needed */
 }
 
-.highlight-card .price {
-    color: white;
+.new-service-read-more {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #F7941E;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
+    display: inline-block;
 }
 
-.original-price {
-    text-decoration: line-through;
-    color: #999;
-    font-size: 1.1rem;
-    font-weight: 500;
+.new-service-read-more:hover {
+    color: #e0800e;
+    text-decoration: underline;
 }
 
-.highlight-card .original-price {
-    color: rgba(255, 255, 255, 0.8);
+.new-service-icon-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    /* Fixed height for alignment */
+    width: 100%;
 }
 
-/* Description */
-.plan-description {
+.new-service-icon {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    /* Drop shadow for the 3D look */
+    /* filter: drop-shadow(0 10px 20px rgba(116, 81, 235, 0.15)); */
+}
+
+.new-service-desc {
+    color: #7a7a7a;
     font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
-    color: #555;
-    max-width: 280px;
-}
-
-.highlight-card .plan-description {
-    color: white;
-}
-
-/* Features */
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2.5rem 0;
-    text-align: left;
-    width: 100%;
-}
-
-.feature-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    color: #333;
-}
-
-.highlight-card .feature-list li {
-    color: white;
-}
-
-.check-icon {
-    flex-shrink: 0;
-    margin-right: 12px;
-}
-
-/* Button */
-/* Button */
-.btn-book-pricing {
+    max-width: 90%;
     margin-top: auto;
-    background-color: #F7941E;
-    border: 2px solid #0E1D28;
-    color: #0E1D28;
-    padding: 12px 32px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    transition: all 0.1s ease;
-    width: 100%;
-    /* 3D Effect */
-    box-shadow: 0px 4px 0px #0E1D28;
-    position: relative;
-    top: 0;
-}
-
-.highlight-card .btn-book-pricing {
-    background-color: white;
-    border-color: #0E1D28;
-    color: #0E1D28;
-    box-shadow: 0px 4px 0px #0E1D28;
-}
-
-.pricing-card .btn-book-pricing:active {
-    box-shadow: 0px 0px 0px #0E1D28;
-    top: 4px;
-}
-
-.pricing-card .btn-book-pricing:hover {
-    transform: none;
-    /* remove previous hover effect */
+    /* Push to bottom if content varies */
 }
 
 /* Responsive */
 @media (max-width: 991px) {
-    .highlight-card {
-        transform: scale(1);
-    }
-
-    .highlight-card:hover {
-        transform: scale(1.02);
-    }
-
-    .pricing-title {
+    .service-main-title {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-page-container {
+        padding-top: 4rem;
+    }
+
+    .new-service-card {
+        padding: 2rem 1.5rem;
+        margin-bottom: 1.5rem;
     }
 }
 
+/* Why Work With Us Section */
+.why-work-section {
+    background-color: #ffffff;
+    /* White background for this section */
+    width: 100vw;
+    /* Ensure full viewport width */
+    margin-left: calc(-50vw + 50%);
+    /* Center it relative to the parent flow if parent is restricted, though we moved it out of container */
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    margin-top: 4rem;
+}
 
+/* Since we moved it out of the container in JSX, we might not need the negative margins if the parent .service-page-container is full width. 
+   Checking parent: .service-page-container is normal div.
+   So simple width 100% and background is enough if it's a direct child. 
+   Let's assume standard full width block.
+*/
+.why-work-section {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 6rem 0;
+    margin-top: 4rem;
+    margin-bottom: 0;
+    /* Remove bottom margin as it's the last section before footer or contact */
+}
 
-.clients-title {
-    font-family: 'Larken', serif;
-    font-size: 3rem;
-    color: #0E1D28;
+.section-header-center {
+    text-align: center;
     margin-bottom: 4rem;
 }
 
-.service-client-logo {
-    height: 40px;
-    /* Increased slightly for better visibility */
-    width: auto;
-    object-fit: contain;
-    filter: grayscale(100%) brightness(0);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.service-client-logo:hover {
-    filter: grayscale(0%) brightness(1);
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-@media (max-width: 768px) {
-    .clients-title {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .service-client-logo {
-
-        margin: 10px;
-    }
-}
-
-/* Client Slider Specific Styles */
-.clients-slider-wrapper {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 15px;
-    /* Prevent full edge touching */
-}
-
-/* Ensure the wrapper created by us in JSX is flex centered */
-.client-logo-wrapper {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    /* specialized height container for logos */
-    outline: none;
-    /* remove slick focus outline */
-}
-
-/* Override existing service-client-logo margins if they conflict */
-.clients-section-service .service-client-logo {
-    margin: 0;
-    /* Let slider handle spacing via wrapper padding if needed, or justify-content */
-    max-height: 50px;
-    /* Ensure uniform size */
-    width: auto;
-}
-
-/* Slick dots customization if needed */
-.clients-section-service .slick-dots li button:before {
-    font-size: 10px;
-    color: #0E1D28;
-}
-
-.clients-section-service .slick-dots li.slick-active button:before {
-    color: #F7941E;
-}
-
-/* Testimonials Styles (Ported from Home.css) */
-.service-testimonials-section {
-    background-color: #ffffff;
-    /* User requested White */
-    padding: 45px 0 45px;
-    font-family: 'Inter', sans-serif;
-    position: relative;
-    z-index: 2;
-}
-
-.service-testimonials-headline {
-    font-family: 'Larken', system-ui, serif;
+.why-work-title {
+    font-family: 'Larken', serif;
     font-size: 3rem;
     color: #0E1D28;
-    margin-bottom: 0;
-    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: 600;
 }
 
-.service-testimonials-headline .highlight-text {
-    color: #F7962D;
-    font-style: italic;
-    /* Matches Home style */
+.why-work-subtitle {
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.6;
 }
 
-.service-rocket-icon {
-    width: 107px;
-    height: auto;
-    position: absolute;
-    top: -41px;
-    right: 20%;
-    z-index: 3;
-}
-
-.service-testimonial-card {
-    background: #fffaf0;
-    /* Light cream to contrast with white section */
+/* Why Cards */
+.why-card {
+    background-color: #ffffff;
+    border: 1px solid #eee;
     border-radius: 20px;
-    padding: 40px 30px;
-    height: 100%;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
+    padding: 2.5rem;
     text-align: left;
-    /* Ensure text is left aligned like standard testimonials */
-    transition: transform 0.3s ease;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service-testimonial-card:hover {
+.why-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-color: transparent;
 }
 
-.service-quote-icon {
-    font-size: 4rem;
-    color: #F7962D;
-    line-height: 1;
-    font-family: serif;
-    margin-bottom: 20px;
+.why-icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
 }
 
-.service-stars {
-    color: #F7962D;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    letter-spacing: 2px;
+.icon-blue {
+    background-color: #E8F0FE;
+    color: #4285F4;
 }
 
-.service-testimonial-title {
+.icon-purple {
+    background-color: #F3E5F5;
+    color: #9C27B0;
+}
+
+.icon-pink {
+    background-color: #FCE4EC;
+    color: #E91E63;
+}
+
+.why-card-title {
+    font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
     color: #0E1D28;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
-.service-testimonial-desc {
+.why-card-desc {
     color: #666;
     font-size: 0.95rem;
     line-height: 1.6;
 }
 
-/* Slider Dots customization */
-.service-testimonials-slider .slick-dots li button:before {
-    font-size: 10px;
-    color: #ccc;
-    opacity: 1;
-}
-
-.service-testimonials-slider .slick-dots li.slick-active button:before {
-    color: #F7962D;
-}
-
-.service-testimonials-slider .slick-dots {
-    bottom: -40px;
-}
-
 @media (max-width: 991px) {
-    .testimonials-headline {
+    .why-work-section {
+        margin-top: 4rem;
+    }
+
+    .why-work-title {
         font-size: 2.2rem;
     }
-
-    .rocket-icon {
-        width: 60px;
-        right: 5%;
-        top: -40px;
-    }
-}
-
-/* Clients Styles from Home (Renamed for Service Page) */
-.service-page-clients-section {
-    padding: 60px 0 50px;
-    background-color: white;
-    overflow: hidden;
-}
-
-.service-page-clients-headline {
-    font-family: 'Larken', serif;
-    font-size: 3rem;
-    color: #0E1D28;
-    margin-bottom: 3rem;
-    font-weight: 500;
-}
-
-.service-page-client-slide {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    height: 100px;
-}
-
-.service-page-client-logo {
-    max-width: 100%;
-    max-height: 114px;
-    width: auto;
-    object-fit: contain;
-    transition: all 0.3s;
-}
-
-.service-page-client-logo:hover {
-    filter: grayscale(0%);
-    opacity: 1;
 }

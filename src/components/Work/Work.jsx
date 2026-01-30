@@ -12,33 +12,42 @@ const projects = [
         id: 1,
         title: 'Madhusudan',
         image: projectMadhusudan,
-        tag: 'DEVELOPMENT'
+        tag: 'DEVELOPMENT',
+        description: 'A comprehensive web solution delivering improved user engagement and business growth through strategic design.',
+        link: '#'
     },
     {
         id: 2,
         title: 'Neelgagan',
         image: projectNeelgagan,
-        tag: 'DEVELOPMENT'
+        tag: 'DEVELOPMENT',
+        description: 'Custom development project focused on scalability, performance, and delivering a seamless user experience.',
+        link: '#'
     },
     {
         id: 3,
         title: 'Sindoor',
         image: projectSindoor,
-        tag: 'DEVELOPMENT'
+        tag: 'DEVELOPMENT',
+        description: 'Innovative digital platform designed to streamlined operations and enhance customer accessibility.',
+        link: '#'
     },
     {
         id: 4,
         title: 'RP Buildtech',
         image: projectRpBuildtech,
-        tag: 'DEVELOPMENT'
+        tag: 'DEVELOPMENT',
+        description: 'Professional corporate website showcasing real estate portfolio with modern UI and robust architecture.',
+        link: '#'
     }
 ];
 
 const Work = ({ workShowcase }) => {
     // Fallback or empty if not provided
-    const projects = workShowcase || [];
+    // Use provided showcase or fallback to default projects
+    const displayProjects = (workShowcase && workShowcase.length > 0) ? workShowcase : projects;
 
-    if (!projects || projects.length === 0) return null;
+    if (!displayProjects || displayProjects.length === 0) return null;
 
     return (
         <section id="case-studies" className="work-section">
@@ -58,20 +67,27 @@ const Work = ({ workShowcase }) => {
 
                         {/* Projects Grid */}
                         <div className="row g-4">
-                            {projects.map((project, index) => (
+                            {displayProjects.map((project, index) => (
                                 <div key={project.id || index} className="col-md-6 mb-4">
-                                    <div className="project-card">
-                                        <div className="project-image-wrapper">
-                                            <span className="project-tag">{project.category || 'DEVELOPMENT'}</span>
-                                            <img src={project.image} alt={project.title} className="project-image" />
+                                    <a
+                                        href={project.link || project.project_url || project.url || '#'}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-decoration-none d-block h-100"
+                                    >
+                                        <div className="project-card">
+                                            <div className="project-image-wrapper">
+                                                <span className="project-tag">{project.category || 'DEVELOPMENT'}</span>
+                                                <img src={project.image} alt={project.title} className="project-image" />
+                                            </div>
+                                            <div className="project-info mt-4">
+                                                <h3 className="project-title">{project.title}</h3>
+                                                <p className="project-desc">
+                                                    {project.description}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div className="project-info mt-4">
-                                            <h3 className="project-title">{project.title}</h3>
-                                            <p className="project-desc">
-                                                {project.description}
-                                            </p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             ))}
                         </div>

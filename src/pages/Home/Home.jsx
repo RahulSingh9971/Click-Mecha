@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+import { FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
+import { FiX } from 'react-icons/fi';
+
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -8,6 +12,7 @@ import 'swiper/css/navigation';
 import './Home.css';
 import Work from '../../components/Work/Work';
 import Contact from '../../components/Contact/Contact';
+import ContactForm from '../../components/ContactForm/ContactForm';
 
 // Assets Imports from src/assets/home-images/
 // Hero
@@ -52,11 +57,93 @@ import baburaoSticker from '../../assets/home-images/baburao-sticker.png';
 import growthBg from '../../assets/home-images/growth-bg.webp';
 
 
+const VideoItem = ({ video }) => {
+    // Fallback thumbnail
+    const thumbnailImage = video.thumbnail || result1;
+    const [isMuted, setIsMuted] = useState(true);
+
+    const getYoutubeId = (url) => {
+        if (!url) return null;
+        // Regex to handle various YouTube URL formats including shorts
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    };
+
+    const videoId = getYoutubeId(video.video_url);
+    const isDirectFile = !videoId && video.video_url;
+
+    return (
+        <div
+            className="result-img-wrapper position-relative"
+            style={{
+                background: '#000',
+                minHeight: '300px',
+                borderRadius: '12px',
+                overflow: 'hidden'
+            }}
+        >
+            {videoId ? (
+                <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&loop=1&playlist=${videoId}&playsinline=1&showinfo=0&modestbranding=1&rel=0`}
+                    title="Video testimonial"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                ></iframe>
+            ) : isDirectFile ? (
+                <video
+                    src={video.video_url}
+                    autoPlay={true}
+                    muted={isMuted}
+                    loop={true}
+                    playsInline={true}
+                    controls={false}
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+            ) : (
+                <div style={{
+                    backgroundImage: `url(${thumbnailImage})`,
+                    width: '100%',
+                    height: '100%',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }} />
+            )}
+            <button
+                className="mute-toggle-btn"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setIsMuted(!isMuted);
+                }}
+                style={{ zIndex: 10, position: 'absolute', bottom: '10px', right: '10px' }}
+            >
+                {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+        </div>
+    );
+};
+
 const Home = () => {
     const [homeData, setHomeData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [playingVideoId, setPlayingVideoId] = useState(null);
+    const [showServiceModal, setShowServiceModal] = useState(false);
+
+    const openServiceModal = () => {
+        setShowServiceModal(true);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeServiceModal = () => {
+        setShowServiceModal(false);
+        document.body.style.overflow = 'unset';
+    };
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -261,6 +348,10 @@ const Home = () => {
                             </div>
                         ))}
                     </div>
+
+                    <div className="text-center mt-5">
+                        <button className="btn-journey" onClick={openServiceModal}>CONTACT US</button>
+                    </div>
                     {/* 
                     <div className="text-center mt-5">
                         <Link to="/services">
@@ -395,37 +486,11 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="row g-3">
-                        {homeData.video_testimonials && homeData.video_testimonials.map((video, index) => {
-                            const isPlaying = playingVideoId === (video.id || index);
-                            return (
-                                <div key={video.id || index} className="col-6 col-md-3">
-                                    <div
-                                        className="result-img-wrapper position-relative"
-                                        style={{ cursor: 'pointer' }}
-                                    >
-                                        {isPlaying ? (
-                                            <iframe
-                                                width="100%"
-                                                height="100%"
-                                                src={`${video.video_url}${video.video_url.includes('?') ? '&' : '?'}autoplay=1`}
-                                                title={video.title}
-                                                frameBorder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                                style={{ position: 'absolute', top: 0, left: 0 }}
-                                            ></iframe>
-                                        ) : (
-                                            <div onClick={() => setPlayingVideoId(video.id || index)}>
-                                                <img src={video.thumbnail} alt={video.title} className="img-fluid result-img" />
-                                                <div className="play-icon-overlay">
-                                                    ▶
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            );
-                        })}
+                        {homeData.video_testimonials && homeData.video_testimonials.map((video, index) => (
+                            <div key={video.id || index} className="col-6 col-md-3">
+                                <VideoItem video={video} />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -466,6 +531,48 @@ const Home = () => {
 
             {/* === Contact Component (Kept Separate) === */}
             <Contact helpData={homeData.help_section} />
+
+            {/* Service Modal */}
+            {showServiceModal && (
+                <div className="modal-overlay" onClick={closeServiceModal} style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(0,0,0,0.8)',
+                    zIndex: 9999,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '20px'
+                }}>
+                    <div className="modal-content-box" onClick={(e) => e.stopPropagation()} style={{
+                        background: '#fff',
+                        borderRadius: '20px',
+                        padding: '30px',
+                        maxWidth: '800px',
+                        width: '100%',
+                        position: 'relative',
+                        maxHeight: '90vh',
+                        overflowY: 'auto'
+                    }}>
+                        <button className="close-modal-btn" onClick={closeServiceModal} style={{
+                            position: 'absolute',
+                            top: '15px',
+                            right: '15px',
+                            background: 'none',
+                            border: 'none',
+                            fontSize: '1.5rem',
+                            cursor: 'pointer',
+                            color: '#333'
+                        }}>
+                            <FiX />
+                        </button>
+                        <ContactForm />
+                    </div>
+                </div>
+            )}
         </main>
     );
 };

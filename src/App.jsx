@@ -13,6 +13,8 @@ import Clientele from './pages/Clientele/Clientele'
 import Career from './pages/Career/Career'
 import CareerDetail from './pages/CareerDetail/CareerDetail'
 import PoSH from './pages/PoSH/PoSH'
+import ServiceDetail from './pages/ServiceDetail/ServiceDetail'
+
 
 import ScrollToTop from './components/ScrollToTop'
 
@@ -33,6 +35,7 @@ function App() {
         <Route path="/clientele" element={<Clientele />} />
         <Route path="/career" element={<Career />} />
         <Route path="/career/:slug" element={<CareerDetail />} />
+        <Route path="/service-detail" element={<ServiceDetail />} />
         <Route path="/posh-policy" element={<PoSH />} />
       </Routes>
       <Footer />
