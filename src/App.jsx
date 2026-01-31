@@ -14,6 +14,7 @@ import Career from './pages/Career/Career'
 import CareerDetail from './pages/CareerDetail/CareerDetail'
 import PoSH from './pages/PoSH/PoSH'
 import ServiceDetail from './pages/ServiceDetail/ServiceDetail'
+import { ContactModalProvider } from './context/ContactModalContext'
 
 
 import ScrollToTop from './components/ScrollToTop'
@@ -22,7 +23,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <ContactModalProvider>
       <ScrollToTop />
       <Header />
       <Routes>
@@ -39,7 +40,7 @@ function App() {
         <Route path="/posh-policy" element={<PoSH />} />
       </Routes>
       <Footer />
-    </>
+    </ContactModalProvider>
   )
 }
 

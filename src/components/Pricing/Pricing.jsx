@@ -1,7 +1,10 @@
 import React from 'react';
 import './Pricing.css';
+import { useContactModal } from '../../context/ContactModalContext';
 
 const Pricing = () => {
+    const { openModal } = useContactModal();
+
     const plans = [
         {
             id: 1,
@@ -79,9 +82,7 @@ const Pricing = () => {
                                     ))}
                                 </ul>
 
-                                <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
-                                    <button className="btn-book-pricing">BOOK A FREE CALL</button>
-                                </a>
+                                <button className="btn-book-pricing" onClick={openModal}>BOOK A FREE CALL</button>
                             </div>
                         </div>
                     ))}

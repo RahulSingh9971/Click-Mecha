@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { LuLightbulb, LuBrainCircuit, LuMoonStar, LuPhone, LuMail } from 'react-icons/lu';
+import { useContactModal } from '../../context/ContactModalContext';
 import './About.css';
 import kavyaImg from '../../assets/about-image/kavya-kapoor.png';
 import storyLeftImg from '../../assets/about-image/story-left.png';
@@ -16,6 +17,7 @@ import curvedArrowImg from '../../assets/about-image/curved-arrow.png';
 const About = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const { openModal } = useContactModal();
 
     const BASE_URL = "https://cms.clickmecha.com";
 
@@ -418,9 +420,9 @@ const About = () => {
 
                             <div className="cta-button-wrapper text-center mt-5 position-relative d-inline-block start-50 translate-middle-x">
                                 <span className="badge-free position-absolute start-50 translate-middle-x">FREE</span>
-                                <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer" className="btn btn-white rounded-pill px-4 py-3 fw-bold">
+                                <button onClick={openModal} className="btn btn-white rounded-pill px-4 py-3 fw-bold">
                                     {general.cta_button_text || "BOOK A 30 MIN CALL"}
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../assets/clickmecha-logo.png';
 import { FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { useContactModal } from '../../context/ContactModalContext';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { openModal } = useContactModal();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -44,16 +46,12 @@ const Header = () => {
                                 <FaEnvelope />
                             </a>
                         </div>
-                        <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
-                            <button className="btn-book">BOOK A FREE CALL</button>
-                        </a>
+                        <button className="btn-book" onClick={openModal}>BOOK A FREE CALL</button>
                     </div>
                 </nav>
 
                 <div className="header-cta desktop-cta">
-                    <a href="https://calendly.com/clickmecha/15min" target="_blank" rel="noopener noreferrer">
-                        <button className="btn-book">BOOK A FREE CALL</button>
-                    </a>
+                    <button className="btn-book" onClick={openModal}>BOOK A FREE CALL</button>
                 </div>
             </div>
         </header>
