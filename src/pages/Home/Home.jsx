@@ -269,9 +269,9 @@ const Home = () => {
                             </div>
                             <h1 className="hero-title mb-4 fade-in-up delay-1" dangerouslySetInnerHTML={{ __html: homeData.hero.title }} />
 
-                            <a href={homeData.hero.button_link} className="btn-journey d-none d-md-inline-block text-decoration-none text-center d-inline-block">
+                            <button className="btn-journey d-none d-md-inline-block text-decoration-none text-center d-inline-block" onClick={openServiceModal}>
                                 {homeData.hero.button_text}
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -283,9 +283,9 @@ const Home = () => {
                 <div className="hero-floating-desc">
                     <p className="d-none d-md-none" dangerouslySetInnerHTML={{ __html: homeData.hero.description }} />
                     <p className="d-md-none" dangerouslySetInnerHTML={{ __html: homeData.hero.description }} />
-                    <a href={homeData.hero.button_link} className="btn-journey d-md-none text-decoration-none text-center d-inline-block">
+                    <button className="btn-journey d-md-none text-decoration-none text-center d-inline-block" onClick={openServiceModal}>
                         {homeData.hero.button_text}
-                    </a>
+                    </button>
                 </div>
             </section>
 

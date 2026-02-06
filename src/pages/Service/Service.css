@@ -2,7 +2,7 @@
     background-color: #fffaf0;
     /* Cream background like the image */
     padding-top: 6rem;
-    padding-bottom: 4rem;
+    /* padding-bottom: 4rem; */
     min-height: 100vh;
 }
 
@@ -43,7 +43,7 @@
     font-size: 1.25rem;
     font-weight: 700;
     color: #0E1D28;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.75rem;
     /* Ensure title doesn't break weirdly, maybe min-height if needed */
 }
 
